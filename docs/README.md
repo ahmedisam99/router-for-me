@@ -9,4 +9,4 @@ None yet.
 
 ## Operations
 
-None yet.
+- [Syncing with upstream](operations/syncing-upstream.md)

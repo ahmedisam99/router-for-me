@@ -1,0 +1,13 @@
+name: cli-proxy-api # fixed, so the project name doesn't follow the directory name
+services:
+  cli-proxy-api:
+    image: eceasy/cli-proxy-api:latest
+    container_name: cli-proxy-api
+    restart: "no" # quoted: a bare no is boolean false under YAML 1.1
+    ports: # OAuth callbacks (codex 1455, claude 54545) are unpublished: add one for a login, then remove it
+      - "127.0.0.1:8317:8317" # cx alias + direct
+      - "127.0.1.1:80:8317" # http://predator-eos (hostname resolves to 127.0.1.1 via /etc/hosts; loopback, not LAN-reachable)
+    volumes:
+      - ./data:/root/.cli-proxy-api
+      - ./config.yaml:/CLIProxyAPI/config.yaml # pinned by inode: edits that replace the file (sed -i, git checkout) need a restart
+      - ./plugins:/CLIProxyAPI/plugins # plugin binaries (.so); plugin data goes to ./data/plugins

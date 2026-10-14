@@ -1,2 +1,5 @@
 .claude/settings.local.json
 CLAUDE.local.md
+/deploy/config.yaml
+/deploy/data/
+/deploy/plugins/

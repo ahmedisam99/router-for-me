@@ -12,7 +12,7 @@ Treat the rest of this file as good defaults rather than hard rules, with one ex
 
 ## Hazards
 
-[TBD]
+None recorded yet. When we run into one, something that must never happen here because it breaks something live, leaks a secret or can't be undone, add it to this list right away as a single line: the rule and why.
 
 ## Upstream's own guidance
 
@@ -45,7 +45,16 @@ If a strict mirror conflicts with my request, raise the conflict instead of sile
 
 ## Documentation
 
-Most changes need no documentation. Why we diverged from upstream goes in the commit message, plus a one-line comment at the patch site when the reason isn't obvious from the code. No feature docs, file catalogs or summaries of merged work. Don't edit upstream's README or docs.
+Most code changes do not need a documentation change. You can read the code. Our docs live in `docs/`. Upstream's READMEs and docs inside the subtrees are theirs: don't edit them.
+
+- `docs/internals/` holds decisions and their reasons, constraints that span the backend, dashboard and plugins, and traps the source does not reveal. That includes why we diverged from upstream when the reason spans more than one file, or when it affects syncing. Before adding a paragraph, ask what a maintainer would get wrong without it. If reading the code answers the question, leave it out.
+- Do not document features, enumerate fields, endpoints or settings, narrate control flow, keep file catalogs, or append summaries of merged work. The code, its types and the git history already record the implementation.
+- No general education. How git subtree or OAuth refresh works in the abstract is not a document here. State our decision and link the spec for the concept.
+- Reasoning local to one function is a code comment next to it. Reasoning that crosses files, layers or the backend/dashboard boundary goes in an internals page. Link to the source with a relative path instead of copying it.
+- When a documented decision or constraint changes, rewrite or delete the affected text. Do not append a second account of the new behavior. A new page needs a distinct, durable reason to exist.
+- `docs/operations/` holds maintainer procedures, such as syncing with upstream or building and deploying. Long and procedural is fine there.
+- `docs/README.md` is the index. A page it does not link does not exist.
+- Read the page before touching its subsystem.
 
 ## Taste
 

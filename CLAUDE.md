@@ -12,7 +12,9 @@ Treat the rest of this file as good defaults rather than hard rules, with one ex
 
 ## Hazards
 
-None recorded yet. When we run into one, something that must never happen here because it breaks something live, leaks a secret or can't be undone, add it to this list right away as a single line: the rule and why.
+When we run into one, something that must never happen here because it breaks something live, leaks a secret or can't be undone, add it to this list right away as a single line: the rule and why.
+
+- Never start a second proxy on a copy of `deploy/data/`. OAuth refresh tokens rotate, so whichever instance refreshes first leaves the other holding a dead token, and that can be the live one.
 
 ## Upstream's own guidance
 

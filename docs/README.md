@@ -9,4 +9,5 @@ None yet.
 
 ## Operations
 
+- [Deploying](operations/deploying.md)
 - [Syncing with upstream](operations/syncing-upstream.md)

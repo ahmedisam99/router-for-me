@@ -3,3 +3,4 @@ CLAUDE.local.md
 /deploy/config.yaml
 /deploy/data/
 /deploy/plugins/
+/deploy/static/

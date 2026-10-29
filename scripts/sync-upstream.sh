@@ -49,16 +49,20 @@ echo "== Backend: build, and the tests of the packages we change"
 (cd CLIProxyAPI && go build -o /dev/null ./cmd/server &&
   go test -count=1 ./internal/api/ ./internal/api/handlers/management/ ./sdk/cliproxy/auth/)
 
-echo "== Plugins: tests and a build against the new backend"
+# A plugin builds against ../../CLIProxyAPI, so its go.mod follows the backend's.
+echo "== Plugins: tidy, tests and a build against the new backend"
 out=$(mktemp -d)
 trap 'rm -rf "$out"' EXIT
 for dir in plugins/*/; do
   [ -f "$dir/go.mod" ] || continue
-  (cd "$dir" && go test -count=1 ./... && go build -buildmode=c-shared -o "$out/plugin.so" .)
+  (cd "$dir" && go mod tidy && go test -count=1 ./... && go build -buildmode=c-shared -o "$out/plugin.so" .)
 done
 
 echo "== Dashboard: tests, lint and build"
 (cd Cli-Proxy-API-Management-Center && bun install --frozen-lockfile && bun run verify)
 
 scripts/fork-diff.sh
+if [ -n "$(git status --porcelain -- plugins)" ]; then
+  echo "The backend's modules moved: commit the plugins' go.mod and go.sum."
+fi
 echo "Next: scripts/staging.sh to look at it, then deploy/up.sh."

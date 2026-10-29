@@ -17,6 +17,9 @@ A backend build normally takes seconds. When `go.mod` or the `golang` base image
 happens on most syncs, it takes about 10 minutes: upstream's Dockerfile has no module cache, so
 every dependency downloads again.
 Compose recreates the container only when the backend changed, and that drops in-flight requests.
+The builder image is `golang:1.26-bookworm` as Docker last pulled it, and it pins its toolchain
+(`GOTOOLCHAIN=local`). When a sync raises the `go` line in `CLIProxyAPI/go.mod` past it, the build
+fails with `go.mod requires go >= ...`; `docker pull golang:1.26-bookworm` and deploy again.
 
 The version stamps name the upstream release each subtree is on, not a version of ours. The backend
 sends its version upstream in `User-Agent`, and the System page compares it with upstream's latest

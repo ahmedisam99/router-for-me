@@ -1,6 +1,6 @@
 module github.com/ahmedisam99/router-for-me/plugins/usage-stats
 
-go 1.26.0
+go 1.26.10
 
 require (
 	github.com/router-for-me/CLIProxyAPI/v8 v8.0.0

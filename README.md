@@ -11,6 +11,7 @@ edit the core when needed.
 | `plugins/` | Our plugins |
 | `deploy/` | The live proxy: compose file and `up.sh`, plus gitignored `config.yaml`, `data/` (auth files, logs), `plugins/` (binaries) and `static/` (built dashboard) |
 | `docs/` | Decisions, traps and procedures; start at `docs/README.md` |
+| `scripts/` | Syncing with upstream, a staging copy beside the live proxy, and what the fork changes |
 | `CLAUDE.md`, `.claude/` | Instructions and settings for Claude Code sessions started here |
 
 ## Remotes

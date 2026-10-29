@@ -25,6 +25,15 @@ release. Our commit goes in `COMMIT` and in the dashboard's `+<sha>` suffix.
 For dashboard work, run `bun run dev` in `Cli-Proxy-API-Management-Center/` and log in to
 `http://127.0.0.1:8317`. Deploy once the change is done.
 
+## Staging
+
+`scripts/staging.sh` runs this checkout beside the live proxy, on `http://127.0.0.1:8318`: the backend,
+the plugins and the dashboard, with a copy of `deploy/config.yaml`, fake accounts and 14 days of fake
+usage, in `/tmp/router-for-me-staging`. It prints a management key, and the live one works too.
+`scripts/staging.sh stop` stops it. Use it to look at a sync or a backend change before deploying.
+Its tokens are fake, so quota checks fail and no request reaches a provider. It never copies
+`deploy/data/`, see the hazards in `CLAUDE.md`.
+
 ## Plugins
 
 `up.sh` builds every `plugins/<id>/` into `deploy/plugins/linux/amd64/<id>.so`. It builds inside the
@@ -56,3 +65,11 @@ The read-only mount blocks the write, but every attempt logs a warning.
 A backend upgrade can rewrite `deploy/config.yaml` and the auth files in `deploy/data/`, so copy both
 before deploying a sync. To roll back, run `deploy/up.sh` from the last good commit and restore the
 copies if the newer backend changed them.
+
+The container owns `deploy/data/` as root, so copy it through the container, and keep the copy
+outside the repo because it holds live tokens:
+
+```bash
+docker exec cli-proxy-api tar -C /root -cf - .cli-proxy-api > data.tar     # copy
+docker exec -i cli-proxy-api tar -C /root -xf - < data.tar                   # restore
+```

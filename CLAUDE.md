@@ -32,8 +32,8 @@ Upstream ships more than one release a day and touches hundreds of files per min
 
 - **Dashboard first, then a plugin, then core.** A dashboard feature that needs backend data gets it from a plugin of ours (`management.register` routes under `/v0/management/...`). Edit the core when a plugin can't do the job.
 - **Our own plugins over third-party ones.** Use a third-party plugin only if it is open source, well maintained and not sketchy.
-- **Keep the diff against upstream small.** Put new logic in new files. When an upstream file must change, make the smallest hunk that works. Don't reformat, rename, move or tidy upstream code we don't need to touch. `git diff backend/<tag> HEAD:CLIProxyAPI` (and `panel/<tag>` for the dashboard) is the record of what the fork changes.
-- **Syncing.** `git subtree merge --squash` an upstream release tag into its directory (see `README.md`). Never rebase or force-push `main`. The backend and dashboard move together, as a matching pair of releases: the dashboard only speaks the v8 management API, and a dashboard newer than its backend breaks.
+- **Keep the diff against upstream small.** Put new logic in new files. When an upstream file must change, make the smallest hunk that works. Don't reformat, rename, move or tidy upstream code we don't need to touch. `scripts/fork-diff.sh` is the record of what the fork changes.
+- **Syncing.** `scripts/sync-upstream.sh` merges an upstream release into each subtree with `git subtree merge --squash` (see `docs/operations/syncing-upstream.md`). Never rebase or force-push `main`. The backend and dashboard move together, as a matching pair of releases: the dashboard only speaks the v8 management API, and a dashboard newer than its backend breaks.
 
 ## Pattern consistency
 

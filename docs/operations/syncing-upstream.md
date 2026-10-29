@@ -24,30 +24,28 @@ upstream tags in without a namespace. Delete those if it happens.
 
 ## Sync
 
-1. Fetch: `git fetch backend-upstream && git fetch panel-upstream`. This also gives `subtree merge`
-   the previous upstream commit it diffs from, which a fresh clone lacks.
-2. Pick the latest release on both sides:
-   `git tag -l 'backend/v*' --sort=-v:refname | head -1`, and the same for `panel/`. Always move
-   both together. The stock backend always serves the latest dashboard release, so latest with
-   latest is the pair upstream runs. A dashboard newer than its backend's management API breaks.
-3. Merge each one, always with `--squash`:
-
-   ```bash
-   git subtree merge --prefix=CLIProxyAPI --squash -m "Sync CLIProxyAPI to v8.0.30" backend/v8.0.30
-   git subtree merge --prefix=Cli-Proxy-API-Management-Center --squash -m "Sync Cli-Proxy-API-Management-Center to v1.26.5" panel/v1.26.5
-   ```
-
-4. Resolve conflicts as in any merge, then `git commit`. `rerere` replays fixes it has seen before.
-5. Run each side's checks from its `AGENTS.md` before pushing.
-
-## Where each subtree stands
-
-The last squash commit for a directory names the upstream commit it came from:
-
 ```bash
-d=CLIProxyAPI   # or Cli-Proxy-API-Management-Center
-git describe --tags --exact-match "$(git log -1 --format=%B --grep="^git-subtree-dir: $d\$" | sed -n 's/^git-subtree-split: //p')"
+scripts/sync-upstream.sh                  # the latest release on both sides
+scripts/sync-upstream.sh v8.0.47 v1.26.7  # or a given pair
 ```
 
-To see what the fork changes against that release:
-`git diff backend/v8.0.29 HEAD:CLIProxyAPI` (or `panel/<tag> HEAD:Cli-Proxy-API-Management-Center`).
+It merges each release with `git subtree merge --squash`, then runs the checks our changes depend on:
+the backend build and the tests of the packages we change, every plugin's tests and build, and the
+dashboard's `bun run verify`. It ends with `scripts/fork-diff.sh` and never pushes or deploys.
+
+Both sides always move together. The stock backend serves the latest dashboard release, so latest
+with latest is the pair upstream runs. A dashboard newer than its backend's management API breaks.
+
+On a conflict the script stops and lists the files. Resolve them, `git commit`, and run it again
+with the same tags: a subtree already on its tag is skipped. `rerere` replays fixes it has seen.
+
+Sync about weekly, or sooner for a fix we need, not on every release. Upstream ships several a day,
+each deploy restarts the live proxy, and a `go.mod` change makes the backend build take about ten
+minutes. Then look at the result with `scripts/staging.sh` and deploy, see
+[Deploying](deploying.md).
+
+## What the fork changes
+
+`scripts/fork-diff.sh` lists, for each subtree, the upstream files we modify and the files we add,
+against the release it is synced to. `--diff` adds the patch of the modified ones, which are the
+hunks a sync can conflict on.

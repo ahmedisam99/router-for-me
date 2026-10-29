@@ -1,0 +1,136 @@
+{
+  "nav": {
+    "credentials": "Credentials",
+    "stats": "Stats",
+    "models": "Models"
+  },
+  "nav_meta": {
+    "credentials": "Keys, accounts & pick order",
+    "stats": "Requests, tokens & errors",
+    "models": "Model map & aliases"
+  },
+  "credentials": {
+    "title": "Credentials",
+    "count_one": "{{count}} credential",
+    "count_other": "{{count}} credentials",
+    "active_count": "{{active}}/{{total}} active",
+    "strategy": {
+      "fill-first": "Fill-first",
+      "round-robin": "Round-robin",
+      "weighted-round-robin": "Weighted round-robin"
+    },
+    "empty": "No credentials yet",
+    "move": "Move {{name}}",
+    "enabled": "{{name}} enabled",
+    "models_one": "{{count}} model",
+    "models_other": "{{count}} models",
+    "kind": {
+      "apikey": "API key",
+      "oauth": "OAuth"
+    },
+    "status": {
+      "active": "Active",
+      "disabled": "Disabled",
+      "cooling": "Cooling until {{time}}",
+      "error": "Error",
+      "unavailable": "Unavailable",
+      "no_models": "No models",
+      "limited": "Limited · {{time}}"
+    },
+    "delete_title": "Delete credential",
+    "delete_confirm": "Delete {{name}}?",
+    "add_title": "Add credential",
+    "add_oauth": "Sign in",
+    "add_upload": "Upload auth file",
+    "add_api_key": "API key",
+    "add_import": "Import",
+    "details": "{{name}} details",
+    "refresh_token": "Refresh token",
+    "download": "Download",
+    "search": "Search credentials",
+    "no_match": "No matching credentials",
+    "select_mode": "Select",
+    "select_done": "Done",
+    "refresh_tokens": "Refresh tokens",
+    "delete_many_confirm_one": "Delete {{count}} credential?",
+    "delete_many_confirm_other": "Delete {{count}} credentials?"
+  },
+  "model_map": {
+    "title": "Models",
+    "count_one": "{{count}} model",
+    "count_other": "{{count}} models",
+    "alias": "alias",
+    "search": "Search models",
+    "aliases_only": "Aliases only",
+    "oauth_aliases": "OAuth aliases",
+    "oauth_exclusions": "OAuth exclusions",
+    "empty": "No models",
+    "no_match": "No matching models",
+    "alias_count_one": "{{count}} aliased model",
+    "alias_count_other": "{{count}} aliased models",
+    "inactive_count_one": "{{count}} inactive",
+    "inactive_count_other": "{{count}} inactive"
+  },
+  "stats_page": {
+    "title": "Stats",
+    "range": "Time range",
+    "ranges": {
+      "24h": "24 hours",
+      "7d": "7 days",
+      "30d": "30 days",
+      "90d": "90 days"
+    },
+    "requests": "Requests",
+    "success_rate": "Success rate",
+    "failed_count_one": "{{count}} failed",
+    "failed_count_other": "{{count}} failed",
+    "tokens": "Tokens",
+    "tokens_detail": "{{input}} in · {{output}} out",
+    "tokens_summary": "{{total}} tokens in this range",
+    "latency": "Avg latency",
+    "ttft": "First token {{value}}",
+    "breakdown": "Breakdown",
+    "dimensions": {
+      "model": "Model",
+      "credential": "Credential",
+      "apiKey": "Client key",
+      "provider": "Provider"
+    },
+    "input": "Input",
+    "output": "Output",
+    "cached": "Cached",
+    "no_requests": "No requests in this range",
+    "failures": "Recent failures",
+    "no_failures": "No failures in this range",
+    "time": "Time",
+    "status": "Status",
+    "message": "Message",
+    "no_key": "No key",
+    "plugin_missing": "Usage stats plugin not installed"
+  },
+  "models_page": {
+    "add_alias": "Add alias",
+    "edit_alias": "Edit alias",
+    "delete_alias": "Delete alias",
+    "delete_alias_confirm": "Delete alias {{alias}}?",
+    "alias": "Alias",
+    "upstream": "Upstream model",
+    "applies_to": "Applies to",
+    "scope_channel": "All {{provider}} accounts",
+    "keep_original": "Keep the original name too",
+    "restricts_key": "This key will then serve only the models listed for it",
+    "oauth_alias_editor": "OAuth alias editor",
+    "status": {
+      "disabled": "Disabled",
+      "not-served": "Not served"
+    }
+  },
+  "home": {
+    "last_24h": "Last 24 hours",
+    "open_stats": "Open stats",
+    "open_credentials": "Open credentials",
+    "client_keys": "Client API keys",
+    "quota_eyebrow": "Quota",
+    "quota_title": "When capacity returns"
+  }
+}

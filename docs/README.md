@@ -5,7 +5,8 @@ for what belongs here.
 
 ## Internals
 
-None yet.
+- [Credential order](internals/credential-order.md)
+- [Dashboard layout](internals/dashboard-layout.md)
 
 ## Operations
 

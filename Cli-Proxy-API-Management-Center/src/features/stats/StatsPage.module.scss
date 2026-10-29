@@ -1,0 +1,260 @@
+@use '../../styles/mixins' as *;
+
+.page {
+  /* Single-series accent, validated against both surfaces and the success/failure colors. */
+  --viz-tokens: #2a78d6;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: 16px;
+    gap: 16px;
+  }
+}
+
+:global([data-theme='dark']) .page {
+  --viz-tokens: #3987e5;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+
+  :global(.btn) > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.filters,
+.segmented {
+  display: inline-flex;
+  align-self: flex-start;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.rangeButton {
+  @include button-reset;
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+
+  &:hover {
+    color: var(--text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 1px;
+  }
+}
+
+.rangeActive {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  box-shadow: var(--shadow);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  transition: opacity var(--dur-hover) var(--ease-out-strong);
+}
+
+.refreshing {
+  opacity: 0.6;
+}
+
+/* ---------- tiles ---------- */
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-primary);
+}
+
+.tileLabel {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.tileValue {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.tileDetail {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+/* ---------- cards ---------- */
+
+.charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+
+  @media (max-width: 1100px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--bg-primary);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.segmentTokens {
+  background: var(--viz-tokens);
+}
+
+.none {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+/* ---------- tables ---------- */
+
+.tableWrap {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+
+  th,
+  td {
+    padding: 8px 10px;
+    text-align: right;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  thead th {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--text-tertiary);
+  }
+
+  th:first-child,
+  td:first-child {
+    text-align: left;
+    padding-left: 0;
+  }
+
+  tbody tr:last-child > * {
+    border-bottom: none;
+  }
+
+  tbody td {
+    color: var(--text-secondary);
+  }
+}
+
+.textTable th,
+.textTable td {
+  text-align: left;
+}
+
+.nameCell {
+  max-width: 340px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.share {
+  display: inline-block;
+  width: 64px;
+  height: 6px;
+  margin-right: 10px;
+  border-radius: 3px;
+  background: var(--bg-tertiary);
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.shareBar {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: var(--primary-color);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.table td.message {
+  max-width: 420px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+}

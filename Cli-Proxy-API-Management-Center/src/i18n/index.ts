@@ -11,6 +11,7 @@ import ru from './locales/ru.json';
 import vi from './locales/vi.json';
 import ko from './locales/ko.json';
 import { getInitialLanguage } from '@/utils/language';
+import { addForkTranslations } from './fork';
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -30,5 +31,6 @@ i18n.use(initReactI18next).init({
     useSuspense: false,
   },
 });
+addForkTranslations(i18n);
 
 export default i18n;

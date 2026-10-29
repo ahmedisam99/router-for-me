@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "credentials": "Thông tin xác thực",
+    "stats": "Thống kê",
+    "models": "Mô hình"
+  },
+  "nav_meta": {
+    "credentials": "Khóa, tài khoản & thứ tự chọn",
+    "stats": "Yêu cầu, token & lỗi",
+    "models": "Bản đồ mô hình & bí danh"
+  },
+  "credentials": {
+    "title": "Thông tin xác thực",
+    "count_other": "{{count}} thông tin xác thực",
+    "active_count": "{{active}}/{{total}} đang bật",
+    "strategy": {
+      "fill-first": "Lấp đầy trước",
+      "round-robin": "Xoay vòng",
+      "weighted-round-robin": "Xoay vòng có trọng số"
+    },
+    "empty": "Chưa có thông tin xác thực",
+    "move": "Di chuyển {{name}}",
+    "enabled": "Bật {{name}}",
+    "models_other": "{{count}} mô hình",
+    "kind": {
+      "apikey": "Khóa API",
+      "oauth": "OAuth"
+    },
+    "status": {
+      "active": "Hoạt động",
+      "disabled": "Đã tắt",
+      "cooling": "Tạm nghỉ đến {{time}}",
+      "error": "Lỗi",
+      "unavailable": "Không khả dụng",
+      "no_models": "Không có mô hình",
+      "limited": "Hết hạn mức · {{time}}"
+    },
+    "delete_title": "Xóa thông tin xác thực",
+    "delete_confirm": "Xóa {{name}}?",
+    "add_title": "Thêm thông tin xác thực",
+    "add_oauth": "Đăng nhập",
+    "add_upload": "Tải lên tệp xác thực",
+    "add_api_key": "Khóa API",
+    "add_import": "Nhập",
+    "details": "Chi tiết {{name}}",
+    "refresh_token": "Làm mới token",
+    "download": "Tải xuống",
+    "search": "Tìm thông tin xác thực",
+    "no_match": "Không có thông tin xác thực phù hợp",
+    "select_mode": "Chọn",
+    "select_done": "Xong",
+    "refresh_tokens": "Làm mới token",
+    "delete_many_confirm_other": "Xóa {{count}} thông tin xác thực?"
+  },
+  "model_map": {
+    "title": "Mô hình",
+    "count_other": "{{count}} mô hình",
+    "alias": "bí danh",
+    "search": "Tìm mô hình",
+    "aliases_only": "Chỉ bí danh",
+    "oauth_aliases": "Bí danh OAuth",
+    "oauth_exclusions": "Loại trừ OAuth",
+    "empty": "Không có mô hình",
+    "no_match": "Không có mô hình phù hợp",
+    "alias_count_other": "{{count}} mô hình có bí danh",
+    "inactive_count_other": "{{count}} không hoạt động"
+  },
+  "stats_page": {
+    "title": "Thống kê",
+    "range": "Khoảng thời gian",
+    "ranges": {
+      "24h": "24 giờ",
+      "7d": "7 ngày",
+      "30d": "30 ngày",
+      "90d": "90 ngày"
+    },
+    "requests": "Yêu cầu",
+    "success_rate": "Tỷ lệ thành công",
+    "failed_count_other": "{{count}} thất bại",
+    "tokens": "Token",
+    "tokens_detail": "{{input}} vào · {{output}} ra",
+    "tokens_summary": "{{total}} token trong khoảng này",
+    "latency": "Độ trễ TB",
+    "ttft": "Token đầu {{value}}",
+    "breakdown": "Chi tiết",
+    "dimensions": {
+      "model": "Mô hình",
+      "credential": "Thông tin xác thực",
+      "apiKey": "Khóa client",
+      "provider": "Nhà cung cấp"
+    },
+    "input": "Vào",
+    "output": "Ra",
+    "cached": "Bộ nhớ đệm",
+    "no_requests": "Không có yêu cầu trong khoảng này",
+    "failures": "Lỗi gần đây",
+    "no_failures": "Không có lỗi trong khoảng này",
+    "time": "Thời gian",
+    "status": "Trạng thái",
+    "message": "Thông báo",
+    "no_key": "Không có khóa",
+    "plugin_missing": "Chưa cài plugin thống kê sử dụng"
+  },
+  "models_page": {
+    "add_alias": "Thêm bí danh",
+    "edit_alias": "Sửa bí danh",
+    "delete_alias": "Xóa bí danh",
+    "delete_alias_confirm": "Xóa bí danh {{alias}}?",
+    "alias": "Bí danh",
+    "upstream": "Mô hình thượng nguồn",
+    "applies_to": "Áp dụng cho",
+    "scope_channel": "Tất cả tài khoản {{provider}}",
+    "keep_original": "Giữ cả tên gốc",
+    "restricts_key": "Khóa này sau đó chỉ phục vụ các mô hình được liệt kê",
+    "oauth_alias_editor": "Trình sửa bí danh OAuth",
+    "status": {
+      "disabled": "Đã tắt",
+      "not-served": "Không được phục vụ"
+    }
+  },
+  "home": {
+    "last_24h": "24 giờ qua",
+    "open_stats": "Mở thống kê",
+    "open_credentials": "Mở thông tin xác thực",
+    "client_keys": "Khóa API của client",
+    "quota_eyebrow": "Hạn mức",
+    "quota_title": "Khi nào hạn mức phục hồi"
+  }
+}

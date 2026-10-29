@@ -1,0 +1,133 @@
+@use '../../styles/mixins' as *;
+
+.page {
+  /* Same single-series accent as the Stats page. */
+  --viz-tokens: #2a78d6;
+
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px;
+  box-sizing: border-box;
+
+  @include mobile {
+    padding: 16px;
+    gap: 20px;
+  }
+}
+
+:global([data-theme='dark']) .page {
+  --viz-tokens: #3987e5;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+
+  :global(.btn) > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+}
+
+.pageTitle {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+}
+
+.sectionBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  a {
+    margin-top: 0;
+  }
+}
+
+.note {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.spark {
+  margin: 4px 0 2px;
+}
+
+/* ---------- recent failures ---------- */
+
+.failures {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.failure {
+  display: grid;
+  grid-template-columns: 44px minmax(160px, 260px) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 0;
+  font-size: 13px;
+
+  & + & {
+    border-top: 1px solid var(--border-color);
+  }
+
+  @include mobile {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+
+    .failureMessage {
+      display: none;
+    }
+  }
+}
+
+.failureStatus {
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-weight: 600;
+  color: var(--failure-badge-text);
+}
+
+.failureWhat {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.failureModel {
+  @include text-ellipsis;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  color: var(--text-primary);
+}
+
+.failureCredential {
+  @include text-ellipsis;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.failureMessage {
+  @include text-ellipsis;
+  font-family: var(--font-mono, ui-monospace, monospace);
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.failureTime {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-tertiary);
+}

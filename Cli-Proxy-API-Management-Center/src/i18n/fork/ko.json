@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "credentials": "자격 증명",
+    "stats": "통계",
+    "models": "모델"
+  },
+  "nav_meta": {
+    "credentials": "키, 계정 및 선택 순서",
+    "stats": "요청, 토큰 및 오류",
+    "models": "모델 맵 및 별칭"
+  },
+  "credentials": {
+    "title": "자격 증명",
+    "count_other": "자격 증명 {{count}}개",
+    "active_count": "{{active}}/{{total}} 활성",
+    "strategy": {
+      "fill-first": "순차 채우기",
+      "round-robin": "라운드 로빈",
+      "weighted-round-robin": "가중 라운드 로빈"
+    },
+    "empty": "자격 증명 없음",
+    "move": "{{name}} 이동",
+    "enabled": "{{name}} 사용",
+    "models_other": "모델 {{count}}개",
+    "kind": {
+      "apikey": "API 키",
+      "oauth": "OAuth"
+    },
+    "status": {
+      "active": "활성",
+      "disabled": "비활성",
+      "cooling": "{{time}}까지 대기",
+      "error": "오류",
+      "unavailable": "사용 불가",
+      "no_models": "모델 없음",
+      "limited": "제한됨 · {{time}}"
+    },
+    "delete_title": "자격 증명 삭제",
+    "delete_confirm": "{{name}}을(를) 삭제할까요?",
+    "add_title": "자격 증명 추가",
+    "add_oauth": "로그인",
+    "add_upload": "인증 파일 업로드",
+    "add_api_key": "API 키",
+    "add_import": "가져오기",
+    "details": "{{name}} 세부 정보",
+    "refresh_token": "토큰 새로 고침",
+    "download": "다운로드",
+    "search": "자격 증명 검색",
+    "no_match": "일치하는 자격 증명 없음",
+    "select_mode": "선택",
+    "select_done": "완료",
+    "refresh_tokens": "토큰 새로고침",
+    "delete_many_confirm_other": "자격 증명 {{count}}개를 삭제할까요?"
+  },
+  "model_map": {
+    "title": "모델",
+    "count_other": "모델 {{count}}개",
+    "alias": "별칭",
+    "search": "모델 검색",
+    "aliases_only": "별칭만",
+    "oauth_aliases": "OAuth 별칭",
+    "oauth_exclusions": "OAuth 제외",
+    "empty": "모델 없음",
+    "no_match": "일치하는 모델 없음",
+    "alias_count_other": "별칭 모델 {{count}}개",
+    "inactive_count_other": "비활성 {{count}}개"
+  },
+  "stats_page": {
+    "title": "통계",
+    "range": "기간",
+    "ranges": {
+      "24h": "24시간",
+      "7d": "7일",
+      "30d": "30일",
+      "90d": "90일"
+    },
+    "requests": "요청",
+    "success_rate": "성공률",
+    "failed_count_other": "실패 {{count}}건",
+    "tokens": "토큰",
+    "tokens_detail": "입력 {{input}} · 출력 {{output}}",
+    "tokens_summary": "이 기간 토큰 {{total}}개",
+    "latency": "평균 지연",
+    "ttft": "첫 토큰 {{value}}",
+    "breakdown": "세부",
+    "dimensions": {
+      "model": "모델",
+      "credential": "자격 증명",
+      "apiKey": "클라이언트 키",
+      "provider": "제공자"
+    },
+    "input": "입력",
+    "output": "출력",
+    "cached": "캐시",
+    "no_requests": "이 기간 요청 없음",
+    "failures": "최근 실패",
+    "no_failures": "이 기간 실패 없음",
+    "time": "시간",
+    "status": "상태",
+    "message": "메시지",
+    "no_key": "키 없음",
+    "plugin_missing": "사용량 통계 플러그인이 설치되지 않음"
+  },
+  "models_page": {
+    "add_alias": "별칭 추가",
+    "edit_alias": "별칭 편집",
+    "delete_alias": "별칭 삭제",
+    "delete_alias_confirm": "별칭 {{alias}}을(를) 삭제할까요?",
+    "alias": "별칭",
+    "upstream": "업스트림 모델",
+    "applies_to": "적용 대상",
+    "scope_channel": "모든 {{provider}} 계정",
+    "keep_original": "원래 이름도 유지",
+    "restricts_key": "이 키는 이후 나열된 모델만 제공합니다",
+    "oauth_alias_editor": "OAuth 별칭 편집기",
+    "status": {
+      "disabled": "비활성",
+      "not-served": "제공되지 않음"
+    }
+  },
+  "home": {
+    "last_24h": "최근 24시간",
+    "open_stats": "통계 열기",
+    "open_credentials": "자격 증명 열기",
+    "client_keys": "클라이언트 API 키",
+    "quota_eyebrow": "할당량",
+    "quota_title": "용량이 돌아오는 시점"
+  }
+}

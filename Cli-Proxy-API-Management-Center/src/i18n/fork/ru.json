@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "credentials": "Учётные данные",
+    "stats": "Статистика",
+    "models": "Модели"
+  },
+  "nav_meta": {
+    "credentials": "Ключи, аккаунты и порядок выбора",
+    "stats": "Запросы, токены и ошибки",
+    "models": "Карта моделей и псевдонимы"
+  },
+  "credentials": {
+    "title": "Учётные данные",
+    "count_one": "{{count}} учётная запись",
+    "count_few": "{{count}} учётные записи",
+    "count_many": "{{count}} учётных записей",
+    "count_other": "{{count}} учётной записи",
+    "active_count": "{{active}}/{{total}} активно",
+    "strategy": {
+      "fill-first": "По порядку",
+      "round-robin": "По кругу",
+      "weighted-round-robin": "По кругу с весами"
+    },
+    "empty": "Учётных данных нет",
+    "move": "Переместить {{name}}",
+    "enabled": "{{name}} включено",
+    "models_one": "{{count}} модель",
+    "models_few": "{{count}} модели",
+    "models_many": "{{count}} моделей",
+    "models_other": "{{count}} модели",
+    "kind": {
+      "apikey": "API-ключ",
+      "oauth": "OAuth"
+    },
+    "status": {
+      "active": "Активно",
+      "disabled": "Отключено",
+      "cooling": "Пауза до {{time}}",
+      "error": "Ошибка",
+      "unavailable": "Недоступен",
+      "no_models": "Нет моделей",
+      "limited": "Лимит · {{time}}"
+    },
+    "delete_title": "Удалить учётные данные",
+    "delete_confirm": "Удалить {{name}}?",
+    "add_title": "Добавить учётные данные",
+    "add_oauth": "Войти",
+    "add_upload": "Загрузить файл авторизации",
+    "add_api_key": "API-ключ",
+    "add_import": "Импорт",
+    "details": "Подробности: {{name}}",
+    "refresh_token": "Обновить токен",
+    "download": "Скачать",
+    "search": "Поиск учётных записей",
+    "no_match": "Нет подходящих учётных записей",
+    "select_mode": "Выбрать",
+    "select_done": "Готово",
+    "refresh_tokens": "Обновить токены",
+    "delete_many_confirm_one": "Удалить {{count}} учётную запись?",
+    "delete_many_confirm_few": "Удалить {{count}} учётные записи?",
+    "delete_many_confirm_many": "Удалить {{count}} учётных записей?",
+    "delete_many_confirm_other": "Удалить {{count}} учётной записи?"
+  },
+  "model_map": {
+    "title": "Модели",
+    "count_one": "{{count}} модель",
+    "count_few": "{{count}} модели",
+    "count_many": "{{count}} моделей",
+    "count_other": "{{count}} модели",
+    "alias": "псевдоним",
+    "search": "Поиск моделей",
+    "aliases_only": "Только псевдонимы",
+    "oauth_aliases": "Псевдонимы OAuth",
+    "oauth_exclusions": "Исключения OAuth",
+    "empty": "Моделей нет",
+    "no_match": "Нет подходящих моделей",
+    "alias_count_one": "{{count}} модель с псевдонимом",
+    "alias_count_few": "{{count}} модели с псевдонимом",
+    "alias_count_many": "{{count}} моделей с псевдонимом",
+    "alias_count_other": "{{count}} модели с псевдонимом",
+    "inactive_count_one": "{{count}} неактивная",
+    "inactive_count_few": "{{count}} неактивные",
+    "inactive_count_many": "{{count}} неактивных",
+    "inactive_count_other": "{{count}} неактивной"
+  },
+  "stats_page": {
+    "title": "Статистика",
+    "range": "Период",
+    "ranges": {
+      "24h": "24 часа",
+      "7d": "7 дней",
+      "30d": "30 дней",
+      "90d": "90 дней"
+    },
+    "requests": "Запросы",
+    "success_rate": "Успешность",
+    "failed_count_one": "{{count}} ошибка",
+    "failed_count_few": "{{count}} ошибки",
+    "failed_count_many": "{{count}} ошибок",
+    "failed_count_other": "{{count}} ошибки",
+    "tokens": "Токены",
+    "tokens_detail": "{{input}} вход · {{output}} выход",
+    "tokens_summary": "{{total}} токенов за период",
+    "latency": "Средняя задержка",
+    "ttft": "Первый токен {{value}}",
+    "breakdown": "Разбивка",
+    "dimensions": {
+      "model": "Модель",
+      "credential": "Учётные данные",
+      "apiKey": "Ключ клиента",
+      "provider": "Провайдер"
+    },
+    "input": "Вход",
+    "output": "Выход",
+    "cached": "Кэш",
+    "no_requests": "Нет запросов за период",
+    "failures": "Последние ошибки",
+    "no_failures": "Нет ошибок за период",
+    "time": "Время",
+    "status": "Статус",
+    "message": "Сообщение",
+    "no_key": "Без ключа",
+    "plugin_missing": "Плагин статистики не установлен"
+  },
+  "models_page": {
+    "add_alias": "Добавить псевдоним",
+    "edit_alias": "Изменить псевдоним",
+    "delete_alias": "Удалить псевдоним",
+    "delete_alias_confirm": "Удалить псевдоним {{alias}}?",
+    "alias": "Псевдоним",
+    "upstream": "Модель провайдера",
+    "applies_to": "Применяется к",
+    "scope_channel": "Все аккаунты {{provider}}",
+    "keep_original": "Сохранить и исходное имя",
+    "restricts_key": "После этого ключ будет обслуживать только перечисленные модели",
+    "oauth_alias_editor": "Редактор псевдонимов OAuth",
+    "status": {
+      "disabled": "Отключено",
+      "not-served": "Не обслуживается"
+    }
+  },
+  "home": {
+    "last_24h": "За 24 часа",
+    "open_stats": "Открыть статистику",
+    "open_credentials": "Открыть учётные данные",
+    "client_keys": "Клиентские API-ключи",
+    "quota_eyebrow": "Лимиты",
+    "quota_title": "Когда вернутся лимиты"
+  }
+}

@@ -1,11 +1,12 @@
 import { Navigate, useRoutes, type Location } from 'react-router-dom';
-import { DashboardPage } from '@/features/dashboard/DashboardPage';
+import { HomePage } from '@/features/home/HomePage';
+import { ModelsPage } from '@/features/models/ModelsPage';
 import { ProvidersWorkbenchPage } from '@/features/providers/ProvidersWorkbenchPage';
-import { AuthFilesPage } from '@/features/authFiles/AuthFilesPage';
+import { CredentialsPage } from '@/features/credentials/CredentialsPage';
 import { AuthFilesOAuthExcludedEditPage } from '@/pages/AuthFilesOAuthExcludedEditPage';
 import { AuthFilesOAuthModelAliasEditPage } from '@/pages/AuthFilesOAuthModelAliasEditPage';
-import { OAuthPage } from '@/features/oauth/OAuthPage';
 import { QuotaPage } from '@/features/quota/QuotaPage';
+import { StatsPage } from '@/features/stats/StatsPage';
 import { PluginResourcePage } from '@/features/plugins/PluginResourcePage';
 import { PluginsPage } from '@/features/plugins/PluginsPage';
 import { PluginStorePage } from '@/features/plugins/PluginStorePage';
@@ -15,18 +16,21 @@ import { SystemPage } from '@/pages/SystemPage';
 import { useAuthStore } from '@/stores';
 
 const createMainRoutes = (supportsPlugin: boolean) => [
-  { path: '/', element: <DashboardPage /> },
-  { path: '/dashboard', element: <DashboardPage /> },
+  { path: '/', element: <HomePage /> },
+  { path: '/dashboard', element: <HomePage /> },
   { path: '/settings', element: <Navigate to="/config" replace /> },
   { path: '/api-keys', element: <Navigate to="/config" replace /> },
   { path: '/quick-start', element: <ProvidersWorkbenchPage fixedBrand="apikeyFun" /> },
   { path: '/quick-start/*', element: <Navigate to="/quick-start" replace /> },
-  { path: '/ai-providers', element: <ProvidersWorkbenchPage /> },
-  { path: '/ai-providers/*', element: <Navigate to="/ai-providers" replace /> },
-  { path: '/auth-files', element: <AuthFilesPage /> },
+  { path: '/credentials', element: <CredentialsPage /> },
+  { path: '/models', element: <ModelsPage /> },
+  { path: '/ai-providers', element: <Navigate to="/credentials" replace /> },
+  { path: '/ai-providers/*', element: <Navigate to="/credentials" replace /> },
+  { path: '/auth-files', element: <Navigate to="/credentials" replace /> },
   { path: '/auth-files/oauth-excluded', element: <AuthFilesOAuthExcludedEditPage /> },
   { path: '/auth-files/oauth-model-alias', element: <AuthFilesOAuthModelAliasEditPage /> },
-  { path: '/oauth', element: <OAuthPage /> },
+  { path: '/oauth', element: <Navigate to="/credentials?add=1" replace /> },
+  { path: '/stats', element: <StatsPage /> },
   { path: '/quota', element: <QuotaPage /> },
   ...(supportsPlugin
     ? [

@@ -16,7 +16,10 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { PageTransition } from '@/components/common/PageTransition';
 import { MainRoutes } from '@/router/MainRoutes';
-import { authFilesApi, pluginsApi } from '@/services/api';
+import { pluginsApi } from '@/services/api';
+import { routingApi } from '@/services/api/routing';
+import { credentialCount } from '@/features/credentials/useCredentialRows';
+import { IconChartColumn } from '@/components/ui/extraIcons';
 import {
   IconSidebarAuthFiles,
   IconSidebarConfig,
@@ -30,6 +33,7 @@ import {
   IconSidebarStore,
   IconSidebarSystem,
   IconChevronDown,
+  IconModelCluster,
 } from '@/components/ui/icons';
 import { INLINE_LOGO_JPEG } from '@/assets/logoInline';
 import {
@@ -65,6 +69,8 @@ const sidebarIcons: Record<string, ReactNode> = {
   config: <IconSidebarConfig size={18} />,
   logs: <IconSidebarLogs size={18} />,
   system: <IconSidebarSystem size={18} />,
+  stats: <IconChartColumn size={18} />,
+  models: <IconModelCluster size={18} />,
 };
 
 interface SidebarNavLinkItem {
@@ -506,14 +512,17 @@ export function MainLayout() {
     }
 
     try {
-      const response = await authFilesApi.list();
+      const [credentials, config] = await Promise.all([
+        routingApi.listCredentials(),
+        fetchConfig().catch(() => null),
+      ]);
       if (requestID !== authFilesCountRequestRef.current) return;
-      setAuthFilesCount(Array.isArray(response?.files) ? response.files.length : null);
+      setAuthFilesCount(credentialCount(credentials, config));
     } catch {
       if (requestID !== authFilesCountRequestRef.current) return;
       setAuthFilesCount(null);
     }
-  }, [connectionStatus]);
+  }, [connectionStatus, fetchConfig]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -611,27 +620,21 @@ export function MainLayout() {
       labelKey: 'nav_groups.gateway',
       items: [
         {
-          path: '/ai-providers',
-          labelKey: 'nav.ai_providers',
-          metaKey: 'nav_meta.ai_providers',
-          icon: sidebarIcons.aiProviders,
-        },
-        {
-          path: '/auth-files',
-          labelKey: 'nav.auth_files',
-          metaKey: 'nav_meta.auth_files',
+          path: '/credentials',
+          labelKey: 'nav.credentials',
+          metaKey: 'nav_meta.credentials',
           badge: authFilesCount ?? undefined,
           badgeLabel:
             typeof authFilesCount === 'number'
-              ? t('sidebar.auth_files_count', { count: authFilesCount })
+              ? t('credentials.count', { count: authFilesCount })
               : undefined,
           icon: sidebarIcons.authFiles,
         },
         {
-          path: '/oauth',
-          labelKey: 'nav.oauth',
-          metaKey: 'nav_meta.oauth',
-          icon: sidebarIcons.oauth,
+          path: '/models',
+          labelKey: 'nav.models',
+          metaKey: 'nav_meta.models',
+          icon: sidebarIcons.models,
         },
         ...(isApiKeyFunConfigured ? [quickStartNavItem] : []),
       ],
@@ -640,6 +643,12 @@ export function MainLayout() {
       id: 'observe',
       labelKey: 'nav_groups.observe',
       items: [
+        {
+          path: '/stats',
+          labelKey: 'nav.stats',
+          metaKey: 'nav_meta.stats',
+          icon: sidebarIcons.stats,
+        },
         {
           path: '/quota',
           labelKey: 'nav.quota_management',

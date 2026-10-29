@@ -1,0 +1,129 @@
+{
+  "nav": {
+    "credentials": "憑證",
+    "stats": "統計",
+    "models": "模型"
+  },
+  "nav_meta": {
+    "credentials": "金鑰、帳號與呼叫順序",
+    "stats": "請求、權杖與錯誤",
+    "models": "模型對應與別名"
+  },
+  "credentials": {
+    "title": "憑證",
+    "count_other": "{{count}} 個憑證",
+    "active_count": "{{active}}/{{total}} 啟用",
+    "strategy": {
+      "fill-first": "順序填充",
+      "round-robin": "輪詢",
+      "weighted-round-robin": "加權輪詢"
+    },
+    "empty": "尚無憑證",
+    "move": "移動 {{name}}",
+    "enabled": "{{name}} 已啟用",
+    "models_other": "{{count}} 個模型",
+    "kind": {
+      "apikey": "API 金鑰",
+      "oauth": "OAuth"
+    },
+    "status": {
+      "active": "可用",
+      "disabled": "已停用",
+      "cooling": "冷卻至 {{time}}",
+      "error": "錯誤",
+      "unavailable": "無法使用",
+      "no_models": "無模型",
+      "limited": "已達上限 · {{time}}"
+    },
+    "delete_title": "刪除憑證",
+    "delete_confirm": "刪除 {{name}}？",
+    "add_title": "新增憑證",
+    "add_oauth": "登入",
+    "add_upload": "上傳認證檔案",
+    "add_api_key": "API 金鑰",
+    "add_import": "匯入",
+    "details": "{{name}} 詳情",
+    "refresh_token": "重新整理權杖",
+    "download": "下載",
+    "search": "搜尋憑證",
+    "no_match": "沒有符合的憑證",
+    "select_mode": "選取",
+    "select_done": "完成",
+    "refresh_tokens": "重新整理權杖",
+    "delete_many_confirm_other": "刪除 {{count}} 個憑證？"
+  },
+  "model_map": {
+    "title": "模型",
+    "count_other": "{{count}} 個模型",
+    "alias": "別名",
+    "search": "搜尋模型",
+    "aliases_only": "僅顯示別名",
+    "oauth_aliases": "OAuth 別名",
+    "oauth_exclusions": "OAuth 排除",
+    "empty": "尚無模型",
+    "no_match": "沒有符合的模型",
+    "alias_count_other": "{{count}} 個別名模型",
+    "inactive_count_other": "{{count}} 個未生效"
+  },
+  "stats_page": {
+    "title": "統計",
+    "range": "時間範圍",
+    "ranges": {
+      "24h": "24 小時",
+      "7d": "7 天",
+      "30d": "30 天",
+      "90d": "90 天"
+    },
+    "requests": "請求",
+    "success_rate": "成功率",
+    "failed_count_other": "{{count}} 次失敗",
+    "tokens": "權杖",
+    "tokens_detail": "輸入 {{input}} · 輸出 {{output}}",
+    "tokens_summary": "此範圍內共 {{total}} 權杖",
+    "latency": "平均延遲",
+    "ttft": "首字 {{value}}",
+    "breakdown": "明細",
+    "dimensions": {
+      "model": "模型",
+      "credential": "憑證",
+      "apiKey": "用戶端金鑰",
+      "provider": "提供者"
+    },
+    "input": "輸入",
+    "output": "輸出",
+    "cached": "快取",
+    "no_requests": "此範圍內沒有請求",
+    "failures": "最近失敗",
+    "no_failures": "此範圍內沒有失敗",
+    "time": "時間",
+    "status": "狀態",
+    "message": "訊息",
+    "no_key": "無金鑰",
+    "plugin_missing": "未安裝用量統計外掛"
+  },
+  "models_page": {
+    "add_alias": "新增別名",
+    "edit_alias": "編輯別名",
+    "delete_alias": "刪除別名",
+    "delete_alias_confirm": "刪除別名 {{alias}}？",
+    "alias": "別名",
+    "upstream": "上游模型",
+    "applies_to": "作用範圍",
+    "scope_channel": "所有 {{provider}} 帳號",
+    "keep_original": "同時保留原名稱",
+    "restricts_key": "此金鑰之後只會提供其列出的模型",
+    "oauth_alias_editor": "OAuth 別名編輯器",
+    "status": {
+      "disabled": "已停用",
+      "not-served": "未提供"
+    }
+  },
+  "home": {
+    "last_24h": "最近 24 小時",
+    "open_stats": "開啟統計",
+    "open_credentials": "開啟憑證",
+    "client_keys": "用戶端 API 金鑰",
+    "quota_eyebrow": "額度",
+    "quota_title": "額度何時恢復"
+  }
+}

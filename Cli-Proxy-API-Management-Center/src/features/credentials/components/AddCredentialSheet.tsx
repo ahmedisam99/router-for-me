@@ -1,10 +1,12 @@
 import { useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import iconCodex from '@/assets/icons/codex.svg';
 import iconVertex from '@/assets/icons/vertex.svg';
 import { Sheet } from '@/components/ui/Sheet';
 import { IconUpload } from '@/components/ui/icons';
 import { OAuthFlowDialog } from '@/features/oauth/components/OAuthFlowDialog';
 import { ProviderTile } from '@/features/oauth/components/ProviderTile';
+import { SiwcBindDialog } from '@/features/oauth/components/SiwcBindDialog';
 import { VertexImportDialog } from '@/features/oauth/components/VertexImportDialog';
 import { useOAuthFlows, usePluginOAuthProviders } from '@/features/oauth/hooks/useOAuthFlows';
 import { useVertexImport } from '@/features/oauth/hooks/useVertexImport';
@@ -49,6 +51,9 @@ export function AddCredentialSheet({
   const focusedRef = useRef<string | null>(null);
   const [dialog, setDialog] = useState<DialogTarget | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  // A new key per open remounts the dialog fresh; it stays mounted after close for its exit motion.
+  const [siwcOpen, setSiwcOpen] = useState(false);
+  const [siwcKey, setSiwcKey] = useState(0);
 
   const pluginProviders = usePluginOAuthProviders(apiBase);
   const providerCards = useMemo<OAuthProviderCard[]>(
@@ -111,6 +116,10 @@ export function AddCredentialSheet({
     closeDialog();
     onClose();
   };
+  const openSiwc = () => {
+    setSiwcKey((key) => key + 1);
+    setSiwcOpen(true);
+  };
 
   const dialogCard =
     dialog?.kind === 'oauth' ? providerCards.find((card) => card.id === dialog.id) : undefined;
@@ -133,6 +142,13 @@ export function AddCredentialSheet({
                 onOpen={() => openProvider(card)}
               />
             ))}
+            <ProviderTile
+              label={t('siwc.bind')}
+              caption={t('siwc.tile_caption')}
+              icon={iconCodex}
+              index={providerCards.length}
+              onOpen={openSiwc}
+            />
           </div>
         </section>
 
@@ -216,6 +232,18 @@ export function AddCredentialSheet({
           onCallbackSubmit={() => void flows.submitCallback(dialogCard.id)}
           onViewAuthFiles={showCredentials}
           onClose={closeDialog}
+        />
+      ) : null}
+
+      {siwcKey > 0 ? (
+        <SiwcBindDialog
+          key={siwcKey}
+          open={siwcOpen}
+          onClose={() => setSiwcOpen(false)}
+          onViewAuthFiles={() => {
+            setSiwcOpen(false);
+            onClose();
+          }}
         />
       ) : null}
 

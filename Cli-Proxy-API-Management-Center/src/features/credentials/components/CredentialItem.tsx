@@ -17,10 +17,12 @@ import {
 } from '@/components/ui/icons';
 import { IconGripVertical } from '@/components/ui/extraIcons';
 import { SelectionCheckbox } from '@/components/ui/SelectionCheckbox';
+import { SiwcStatusBadge } from '@/features/oauth/components/SiwcStatusBadge';
+import { getSiwcBindingStatus, supportsSiwcBinding } from '@/features/oauth/siwcBinding';
 import { ToggleSwitch } from '@/components/ui/ToggleSwitch';
 import { useNow } from '@/hooks/useNow';
 import type { ResolvedTheme } from '@/types';
-import { formatFileSize } from '@/utils/format';
+import { formatDateTimeValue, formatFileSize } from '@/utils/format';
 import { formatInstantShort } from '@/utils/quota/relativeTime';
 import { statusBarDataFromRecentRequests } from '@/utils/recentRequests';
 import { formatCountdown, limitedUntil, quotaLimits, quotaPlan } from '../quota';
@@ -311,6 +313,18 @@ export function CredentialItem({
                 <span>
                   {t('stats.failure')} {row.file.failureCount ?? 0}
                 </span>
+                {supportsSiwcBinding(row.file) ? (
+                  <span className={styles.fileMetaSiwc}>
+                    <SiwcStatusBadge status={getSiwcBindingStatus(row.file)} />
+                    {row.file.siwcExpiresAt ? (
+                      <span title={row.file.siwcExpiresAt}>
+                        {t('siwc.expires', {
+                          date: formatDateTimeValue(row.file.siwcExpiresAt, i18n.language),
+                        })}
+                      </span>
+                    ) : null}
+                  </span>
+                ) : null}
               </div>
               {onRefreshToken || onDownload ? (
                 <div className={styles.detailsActions}>

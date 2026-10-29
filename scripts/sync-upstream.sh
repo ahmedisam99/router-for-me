@@ -21,16 +21,17 @@ latest() { git tag -l "$1/v*" --sort=-v:refname | sed -n "1s|^$1/||p"; }
 backend=${1:-$(latest backend)}
 panel=${2:-$(latest panel)}
 
-# current CLIProxyAPI -> v8.0.34, read from the subtree's last squash commit
-current() {
+# synced CLIProxyAPI -> v8.0.47, read from the subtree's last squash commit; synced CLIProxyAPI 1 -> the
+# release it was on before that
+synced() {
   git describe --tags --exact-match \
-    "$(git log -1 --format=%B --grep="^git-subtree-dir: $1\$" | sed -n 's/^git-subtree-split: //p')" |
-    sed 's|^[^/]*/||'
+    "$(git log --skip="${2:-0}" -1 --format=%B --grep="^git-subtree-dir: $1\$" |
+      sed -n 's/^git-subtree-split: //p')" | sed 's|^[^/]*/||'
 }
 
 # merge <dir> <tag namespace> <tag>
 merge() {
-  if [ "$(current "$1")" = "$3" ]; then
+  if [ "$(synced "$1")" = "$3" ]; then
     echo "$1 is on $3"
     return
   fi
@@ -62,6 +63,18 @@ echo "== Dashboard: tests, lint and build"
 (cd Cli-Proxy-API-Management-Center && bun install --frozen-lockfile && bun run verify)
 
 scripts/fork-diff.sh
+
+# Our pages replace these (docs/internals/dashboard-layout.md), so what upstream adds to them reaches
+# our dashboard only if we carry it over. Paths are as in upstream's repo, compared between its tags.
+replaced=(src/features/authFiles/AuthFilesPage.tsx src/features/authFiles/components/AuthFileCard.tsx
+  src/features/oauth/OAuthPage.tsx src/features/dashboard/DashboardPage.tsx
+  src/features/providers/ProvidersWorkbenchPage.tsx 'src/features/providers/components/ProviderResource*.tsx')
+previous=$(synced Cli-Proxy-API-Management-Center 1)
+changed=$(git diff --stat "panel/$previous" "panel/$panel" -- "${replaced[@]}")
+if [ -n "$changed" ]; then
+  echo "Upstream changed pages ours replace since $previous; carry any new feature over:"
+  echo "$changed"
+fi
 if [ -n "$(git status --porcelain -- plugins)" ]; then
   echo "The backend's modules moved: commit the plugins' go.mod and go.sum."
 fi

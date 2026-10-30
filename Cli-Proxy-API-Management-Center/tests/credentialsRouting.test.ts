@@ -40,6 +40,7 @@ const credential = (overrides: Partial<RoutingCredential>): RoutingCredential =>
   unavailable: false,
   nextRetryAfter: null,
   models: [],
+  lastModels: [],
   recentRequests: [],
   ...overrides,
 });
@@ -57,6 +58,7 @@ describe('routing API', () => {
             source: 'file',
             priority: 3,
             models: [{ id: 'claude-opus-5-5', upstream: ['gpt-6.1-sol'] }, { id: 'gpt-5.5' }],
+            last_models: [{ id: 'gpt-6-luna' }],
           },
           { auth_index: 'missing-id' },
         ],
@@ -69,6 +71,7 @@ describe('routing API', () => {
       { id: 'claude-opus-5-5', upstream: ['gpt-6.1-sol'] },
       { id: 'gpt-5.5', upstream: ['gpt-5.5'] },
     ]);
+    expect(item.lastModels).toEqual([{ id: 'gpt-6-luna', upstream: ['gpt-6-luna'] }]);
   });
 
   test('writes key priorities per family, group priority for OpenAI-compatible, fields for files', async () => {
@@ -320,6 +323,52 @@ describe('inactive routes', () => {
     const fable = map.find((entry) => entry.id === 'fable');
     expect(fable?.live).toBe(false);
     expect(fable?.routes[0]).toMatchObject({ rank: 0, inactive: 'disabled' });
+  });
+
+  test('lists what a disabled credential last served once, beside its aliases', () => {
+    const disabledAccount = {
+      ...rows[0],
+      disabled: true,
+      credential: {
+        ...rows[0].credential,
+        models: [],
+        lastModels: [
+          { id: 'gpt', upstream: ['gpt'] },
+          { id: 'opus', upstream: ['gpt'] },
+        ],
+      },
+    };
+    const routes = inactiveRoutes([disabledAccount], [channelAlias], []);
+    expect(routes.map((route) => [route.id, route.upstream, route.reason])).toEqual([
+      ['gpt', ['gpt'], 'disabled'],
+      ['opus', ['gpt'], 'disabled'],
+    ]);
+    const map = buildModelMap([disabledAccount], 'fill-first', routes);
+    expect(map.map((entry) => [entry.id, entry.live, entry.renamed])).toEqual([
+      ['gpt', false, false],
+      ['opus', false, true],
+    ]);
+  });
+
+  test("lists a disabled provider's configured models when the backend leaves it out", () => {
+    const openRouter = {
+      id: 'openai:0',
+      name: 'OpenRouter',
+      brand: 'openaiCompatibility',
+      authIndex: null,
+      disabled: true,
+      models: [],
+      raw: {
+        apiKeyEntries: [],
+        models: [{ name: 'z-ai/glm-5.3-flash' }, { name: 'openai/gpt-6.1-sol', alias: 'sol' }],
+      },
+    } as unknown as ProviderResource;
+    const leftOut = buildCredentialRows([], [openRouter], []);
+    const routes = inactiveRoutes(leftOut, [], []);
+    expect(routes.map((route) => [route.id, route.upstream, route.reason])).toEqual([
+      ['z-ai/glm-5.3-flash', ['z-ai/glm-5.3-flash'], 'disabled'],
+      ['sol', ['openai/gpt-6.1-sol'], 'disabled'],
+    ]);
   });
 
   test('tags an alias with where it applies, its names and its replies', () => {

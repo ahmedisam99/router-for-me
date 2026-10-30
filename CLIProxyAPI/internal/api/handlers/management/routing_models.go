@@ -13,7 +13,8 @@ import (
 
 // GetRoutingModels lists every runtime credential, config API keys included, with
 // the model IDs it serves and the upstream models each resolves to. Credentials
-// come in fill-first pick order: priority descending, then ID ascending.
+// come in fill-first pick order: priority descending, then ID ascending. A disabled
+// credential serves nothing; last_models lists what it served when last seen enabled.
 func (h *Handler) GetRoutingModels(c *gin.Context) {
 	if h == nil || h.authManager == nil {
 		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "auth manager unavailable"})
@@ -31,22 +32,20 @@ func (h *Handler) GetRoutingModels(c *gin.Context) {
 	})
 
 	credentials := make([]gin.H, 0, len(auths))
+	enabledModels := make(map[string][]string, len(auths))
 	for _, auth := range auths {
 		auth.EnsureIndex()
 		unavailable, status, statusMessage, nextRetryAfter := reconcileAuthFileCooldownState(auth, now)
-		models := make([]gin.H, 0)
+		var ids []string
 		for _, model := range reg.GetModelsForClient(auth.ID) {
-			if model == nil || strings.TrimSpace(model.ID) == "" {
-				continue
+			if model != nil && strings.TrimSpace(model.ID) != "" {
+				ids = append(ids, model.ID)
 			}
-			models = append(models, gin.H{
-				"id":       model.ID,
-				"upstream": h.authManager.UpstreamModels(auth, model.ID),
-			})
 		}
-		sort.Slice(models, func(i, j int) bool {
-			return models[i]["id"].(string) < models[j]["id"].(string)
-		})
+		sort.Strings(ids)
+		if !auth.Disabled {
+			enabledModels[auth.ID] = ids
+		}
 		entry := gin.H{
 			"id":              auth.ID,
 			"auth_index":      auth.Index,
@@ -60,7 +59,7 @@ func (h *Handler) GetRoutingModels(c *gin.Context) {
 			"status":          status,
 			"status_message":  statusMessage,
 			"unavailable":     unavailable,
-			"models":          models,
+			"models":          h.routingModels(auth, ids),
 			"recent_requests": auth.RecentRequestsSnapshot(now),
 		}
 		if !nextRetryAfter.IsZero() {
@@ -68,5 +67,20 @@ func (h *Handler) GetRoutingModels(c *gin.Context) {
 		}
 		credentials = append(credentials, entry)
 	}
+	remembered := lastModels.update(lastModelsPath(h.configSnapshot()), enabledModels)
+	for i, auth := range auths {
+		if auth.Disabled {
+			credentials[i]["last_models"] = h.routingModels(auth, remembered[auth.ID])
+		}
+	}
 	c.JSON(http.StatusOK, gin.H{"credentials": credentials})
+}
+
+// routingModels pairs each model ID auth serves with the upstream models it resolves to.
+func (h *Handler) routingModels(auth *coreauth.Auth, ids []string) []gin.H {
+	models := make([]gin.H, 0, len(ids))
+	for _, id := range ids {
+		models = append(models, gin.H{"id": id, "upstream": h.authManager.UpstreamModels(auth, id)})
+	}
+	return models
 }

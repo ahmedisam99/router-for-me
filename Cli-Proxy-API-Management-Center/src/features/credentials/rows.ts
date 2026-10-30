@@ -99,6 +99,7 @@ const disabledResourceCredential = (resource: ProviderResource): RoutingCredenti
   unavailable: false,
   nextRetryAfter: null,
   models: [],
+  lastModels: [],
   recentRequests: [],
 });
 

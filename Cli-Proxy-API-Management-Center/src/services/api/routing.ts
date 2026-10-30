@@ -26,6 +26,8 @@ export interface RoutingCredential {
   unavailable: boolean;
   nextRetryAfter: string | null;
   models: RoutingModel[];
+  /** A disabled credential's models when it was last seen enabled; it serves none now. */
+  lastModels: RoutingModel[];
   recentRequests: RecentRequestBucket[];
 }
 
@@ -38,6 +40,11 @@ const normalizeModel = (value: unknown): RoutingModel | null => {
   const upstream = Array.isArray(value.upstream) ? value.upstream.map(text).filter(Boolean) : [];
   return { id, upstream: upstream.length > 0 ? upstream : [id] };
 };
+
+const normalizeModels = (value: unknown): RoutingModel[] =>
+  (Array.isArray(value) ? value : [])
+    .map(normalizeModel)
+    .filter((model): model is RoutingModel => model !== null);
 
 const normalizeCredential = (value: unknown): RoutingCredential | null => {
   if (!isRecord(value)) return null;
@@ -58,9 +65,8 @@ const normalizeCredential = (value: unknown): RoutingCredential | null => {
     statusMessage: text(value.status_message),
     unavailable: value.unavailable === true,
     nextRetryAfter: text(value.next_retry_after) || null,
-    models: (Array.isArray(value.models) ? value.models : [])
-      .map(normalizeModel)
-      .filter((model): model is RoutingModel => model !== null),
+    models: normalizeModels(value.models),
+    lastModels: normalizeModels(value.last_models),
     recentRequests: normalizeRecentRequestBuckets(value.recent_requests),
   };
 };

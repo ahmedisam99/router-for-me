@@ -42,3 +42,10 @@ The upstream names come from `Manager.UpstreamModels` in
 `executionModelCandidatesWithAlias` that skips advancing the model pool cursor, so a read can't
 shift live routing. Its test compares the two, so a sync that changes the executor's alias logic
 fails there rather than drifting silently.
+
+Disabling a credential drops its models from the registry, and working out what it would serve
+means copying upstream's per-provider registration. So the endpoint remembers what each enabled
+credential serves, in `<auth-dir>/routing/last-models.yaml`, and lists that as a disabled one's
+`last_models`. The memory updates only when the endpoint is read, which the dashboard does before
+you can disable anything. A disabled OpenAI-compatible provider has no credential at all, so the
+dashboard lists the models from its config instead.

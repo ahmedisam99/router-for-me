@@ -64,7 +64,7 @@ export function ModelsPage() {
   const aliases = useMemo(() => definitions?.aliases ?? [], [definitions]);
   const entries = useMemo(() => {
     if (!rows) return null;
-    const inactive = definitions ? inactiveRoutes(rows, aliases, definitions.keyModels) : [];
+    const inactive = inactiveRoutes(rows, aliases, definitions?.keyModels ?? []);
     return buildModelMap(rows, strategy, inactive);
   }, [aliases, definitions, rows, strategy]);
 

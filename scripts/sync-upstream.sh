@@ -48,7 +48,8 @@ merge Cli-Proxy-API-Management-Center panel "$panel"
 
 echo "== Backend: build, and the tests of the packages we change"
 (cd CLIProxyAPI && go build -o /dev/null ./cmd/server &&
-  go test -count=1 ./internal/api/ ./internal/api/handlers/management/ ./sdk/cliproxy/auth/)
+  go test -count=1 ./internal/api/ ./internal/api/handlers/management/ ./internal/clientkeys/ \
+    ./sdk/api/handlers/ ./sdk/cliproxy/auth/)
 
 # A plugin builds against ../../CLIProxyAPI, so its go.mod follows the backend's.
 echo "== Plugins: tidy, tests and a build against the new backend"

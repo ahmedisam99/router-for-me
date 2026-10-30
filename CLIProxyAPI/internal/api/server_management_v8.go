@@ -34,6 +34,12 @@ func (s *Server) registerManagementV8Routes() {
 	v8.POST("/routing/model-definitions/refresh", s.mgmt.RefreshModelDefinitions)
 	v8.POST("/models/refresh", s.mgmt.RefreshModelDefinitions)
 	v8.GET("/routing/models", s.mgmt.GetRoutingModels)
+	v8.GET("/client-keys", s.mgmt.GetClientKeys)
+	v8.PUT("/client-keys/keys/:id", s.mgmt.PutClientKey)
+	v8.PUT("/client-keys/profiles", s.mgmt.PutClientKeyProfiles)
+	v8.GET("/client-keys/prices", s.mgmt.GetClientKeyPrices)
+	v8.PUT("/client-keys/prices", s.mgmt.PutClientKeyPrice)
+	v8.POST("/client-keys/prices/refresh", s.mgmt.RefreshClientKeyPrices)
 
 	v8.GET("/observability/logs", s.mgmt.GetLogs)
 	v8.DELETE("/observability/logs", s.mgmt.DeleteLogs)

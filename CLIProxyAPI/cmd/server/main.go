@@ -21,6 +21,7 @@ import (
 	configaccess "github.com/router-for-me/CLIProxyAPI/v8/internal/access/config_access"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/api"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/buildinfo"
+	"github.com/router-for-me/CLIProxyAPI/v8/internal/clientkeys"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/cmd"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/config"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/githubauth"
@@ -755,6 +756,7 @@ func main() {
 			if standalone {
 				// Standalone mode: start an embedded local server and connect TUI client to it.
 				managementasset.StartAutoUpdater(context.Background(), configFilePath)
+				clientkeys.Start(context.Background(), cfg)
 				misc.StartAntigravityVersionUpdater(context.Background())
 				registry.SetLocalModelCatalogs(localModel)
 				hook := tui.NewLogHook(2000)
@@ -830,6 +832,7 @@ func main() {
 		} else {
 			// Start the main proxy service
 			managementasset.StartAutoUpdater(context.Background(), configFilePath)
+			clientkeys.Start(context.Background(), cfg)
 			misc.StartAntigravityVersionUpdater(context.Background())
 			registry.SetLocalModelCatalogs(localModel)
 			cmd.StartServiceWithPluginHost(cfg, configFilePath, password, pluginHost, serverOptions...)

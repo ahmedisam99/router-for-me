@@ -5,6 +5,7 @@ for what belongs here.
 
 ## Internals
 
+- [Client keys](internals/client-keys.md)
 - [Credential order](internals/credential-order.md)
 - [Dashboard layout](internals/dashboard-layout.md)
 

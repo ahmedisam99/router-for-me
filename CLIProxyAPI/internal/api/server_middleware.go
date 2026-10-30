@@ -12,6 +12,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/api/middleware"
 	codexlive "github.com/router-for-me/CLIProxyAPI/v8/internal/client/codex/live"
+	"github.com/router-for-me/CLIProxyAPI/v8/internal/clientkeys"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/config"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/home"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/httpwire"
@@ -511,6 +512,9 @@ func accessAuthMiddleware(manager *sdkaccess.Manager, realtimeError bool) gin.Ha
 		}
 
 		result, err := manager.Authenticate(c.Request.Context(), c.Request)
+		if err == nil && result != nil {
+			err = clientkeys.Admit(result.Principal)
+		}
 		if err == nil {
 			if result != nil {
 				c.Set("userApiKey", result.Principal)
@@ -579,6 +583,9 @@ func realtimeAuthMiddleware(manager *sdkaccess.Manager, handler *codexlive.Handl
 		principal := authorization.IssuerPrincipal
 		if principal == "" {
 			principal = authorization.Principal
+		}
+		if clientKeyRealtimeDenied(c, principal) {
+			return
 		}
 		provider := authorization.IssuerProvider
 		if provider == "" {

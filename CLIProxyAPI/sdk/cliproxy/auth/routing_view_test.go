@@ -2,9 +2,11 @@ package auth
 
 import (
 	"reflect"
+	"slices"
 	"testing"
 
 	internalconfig "github.com/router-for-me/CLIProxyAPI/v8/internal/config"
+	"github.com/router-for-me/CLIProxyAPI/v8/internal/registry"
 )
 
 // TestUpstreamModelsMatchesExecution walks every branch of
@@ -215,5 +217,38 @@ func compatTestAuth() *Auth {
 			"compat_name":   "compat",
 			"provider_key":  "openai-compatibility:compat",
 		},
+	}
+}
+
+func TestUpstreamModelsForModelUnionsEnabledServingCredentials(t *testing.T) {
+	manager := NewManager(nil, nil, nil)
+	manager.SetConfig(&internalconfig.Config{})
+	manager.SetOAuthModelAlias(map[string][]internalconfig.OAuthModelAlias{"codex": {
+		{Name: "gpt-6.1-sol", Alias: "claude-opus-5-5", Fork: true},
+	}})
+	aliased := codexOAuthTestAuth(nil)
+	direct := &Auth{ID: "claude-b", Provider: "claude", Attributes: map[string]string{AttributeAuthKind: AuthKindOAuth}}
+	disabled := codexOAuthTestAuth(map[string]string{
+		oauthModelAliasesAttributeKey: `[{"name":"gpt-6.1-luna","alias":"claude-opus-5-5"}]`,
+	})
+	disabled.ID = "codex-c.json"
+	disabled.Disabled = true
+	for _, auth := range []*Auth{aliased, direct, disabled} {
+		registerCapabilityTestAuth(t, manager, auth)
+		registry.GetGlobalRegistry().RegisterClient(auth.ID, auth.Provider, []*registry.ModelInfo{{ID: "claude-opus-5-5"}})
+		id := auth.ID
+		t.Cleanup(func() { registry.GetGlobalRegistry().UnregisterClient(id) })
+	}
+
+	want := []string{"claude-opus-5-5", "gpt-6.1-sol"}
+	for _, model := range []string{"claude-opus-5-5", "tenant/claude-opus-5-5"} {
+		got := manager.UpstreamModelsForModel(model)
+		slices.Sort(got)
+		if !reflect.DeepEqual(got, want) {
+			t.Fatalf("UpstreamModelsForModel(%q) = %v, want %v", model, got, want)
+		}
+	}
+	if got := manager.UpstreamModelsForModel("unserved"); len(got) != 0 {
+		t.Fatalf("UpstreamModelsForModel(unserved) = %v, want none", got)
 	}
 }

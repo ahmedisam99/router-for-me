@@ -846,6 +846,9 @@ func (h *OpenAIResponsesAPIHandler) ResponsesWebsocket(c *gin.Context) {
 					}
 				}
 				if errAuth == nil {
+					errAuth = h.RejectClientKeyTurn(boundPrincipal, h.HandlerType(), modelName, requestJSON, turnPayload)
+				}
+				if errAuth == nil {
 					return nil, nil
 				}
 				return buildResponsesWebsocketErrorPayload(errAuth)

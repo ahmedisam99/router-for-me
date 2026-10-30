@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "자격 증명",
     "stats": "통계",
-    "models": "모델"
+    "models": "모델",
+    "keys": "키"
   },
   "nav_meta": {
     "credentials": "키, 계정 및 선택 순서",
     "stats": "요청, 토큰 및 오류",
-    "models": "모델 맵 및 별칭"
+    "models": "모델 맵 및 별칭",
+    "keys": "클라이언트 키, 예산 및 규칙"
   },
   "credentials": {
     "title": "자격 증명",
@@ -125,5 +127,97 @@
     "client_keys": "클라이언트 API 키",
     "quota_eyebrow": "할당량",
     "quota_title": "용량이 돌아오는 시점"
+  },
+  "keys_page": {
+    "title": "키",
+    "on_count": "{{on}}/{{total}} 사용",
+    "add_key": "키 추가",
+    "tabs": {
+      "keys": "키",
+      "profiles": "프로필",
+      "prices": "가격"
+    },
+    "empty": "키 없음",
+    "copy": "{{name}} 복사",
+    "enabled": "{{name}} 사용",
+    "edit": "{{name}} 편집",
+    "delete": "{{name}} 삭제",
+    "profile_of": "{{name}}의 프로필",
+    "no_profile": "프로필 없음",
+    "windows": {
+      "5h": "5시간",
+      "day": "24시간",
+      "week": "7일",
+      "month": "30일"
+    },
+    "window_budgets": {
+      "5h": "최근 5시간",
+      "day": "최근 24시간",
+      "week": "최근 7일",
+      "month": "최근 30일"
+    },
+    "blocked": "차단됨: 예산 초과",
+    "over_budget": "예산 초과",
+    "last_used": "{{time}} 사용",
+    "never_used": "사용 기록 없음",
+    "name": "이름",
+    "budgets": "예산 (USD)",
+    "when_over": "예산 초과 시",
+    "over_block": "요청 차단",
+    "over_warn": "허용하고 표시",
+    "invalid_amount": "잘못된 금액",
+    "name_not_saved": "이름 저장 실패",
+    "delete_title": "키 삭제",
+    "delete_confirm": "{{name}}을(를) 삭제할까요?",
+    "key_exists": "이미 있는 키",
+    "profiles_empty": "프로필 없음",
+    "add_profile": "프로필 추가",
+    "edit_profile": "프로필 편집",
+    "delete_profile": "프로필 삭제",
+    "delete_profile_confirm": "{{name}}을(를) 삭제할까요?",
+    "used_by_other": "키 {{count}}개",
+    "no_rules": "규칙 없음",
+    "rule_blocked": "차단",
+    "rules": "규칙",
+    "rule": "규칙 {{n}}",
+    "add_rule": "규칙 추가",
+    "move_rule_up": "규칙 {{n}} 위로 이동",
+    "move_rule_down": "규칙 {{n}} 아래로 이동",
+    "delete_rule": "규칙 {{n}} 삭제",
+    "models": "모델",
+    "model_n": "모델 {{n}}",
+    "add_model": "모델 추가",
+    "remove_model": "모델 {{n}} 제거",
+    "effort": "추론 강도",
+    "any_effort": "모두",
+    "action": "동작",
+    "action_block": "차단",
+    "action_redirect": "리디렉션",
+    "redirect_model": "리디렉션할 모델",
+    "redirect_effort": "리디렉션할 추론 강도",
+    "keep": "유지",
+    "profile_errors": {
+      "name": "이름 필요",
+      "name_taken": "이미 사용 중인 이름",
+      "models": "규칙 {{rule}}에 모델 없음",
+      "target": "규칙 {{rule}}에 리디렉션 대상 없음"
+    },
+    "per_million": "100만 토큰당 USD",
+    "price_source": "{{name}} · {{time}} 업데이트",
+    "refresh_prices": "가격 새로고침",
+    "unpriced_other": "가격 없음 {{count}}개",
+    "prices_empty": "모델 없음",
+    "model": "모델",
+    "input": "입력",
+    "output": "출력",
+    "cache_read": "캐시 읽기",
+    "cache_write": "캐시 쓰기",
+    "origin": "출처",
+    "origins": {
+      "imported": "가져옴",
+      "override": "재정의",
+      "none": "없음"
+    },
+    "reset_price": "초기화"
   }
 }

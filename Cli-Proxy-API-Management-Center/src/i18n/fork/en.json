@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "Credentials",
     "stats": "Stats",
-    "models": "Models"
+    "models": "Models",
+    "keys": "Keys"
   },
   "nav_meta": {
     "credentials": "Keys, accounts & pick order",
     "stats": "Requests, tokens & errors",
-    "models": "Model map & aliases"
+    "models": "Model map & aliases",
+    "keys": "Client keys, budgets & rules"
   },
   "credentials": {
     "title": "Credentials",
@@ -132,5 +134,99 @@
     "client_keys": "Client API keys",
     "quota_eyebrow": "Quota",
     "quota_title": "When capacity returns"
+  },
+  "keys_page": {
+    "title": "Keys",
+    "on_count": "{{on}}/{{total}} on",
+    "add_key": "Add key",
+    "tabs": {
+      "keys": "Keys",
+      "profiles": "Profiles",
+      "prices": "Prices"
+    },
+    "empty": "No keys yet",
+    "copy": "Copy {{name}}",
+    "enabled": "{{name}} on",
+    "edit": "Edit {{name}}",
+    "delete": "Delete {{name}}",
+    "profile_of": "Profile of {{name}}",
+    "no_profile": "No profile",
+    "windows": {
+      "5h": "5h",
+      "day": "24h",
+      "week": "7d",
+      "month": "30d"
+    },
+    "window_budgets": {
+      "5h": "Last 5 hours",
+      "day": "Last 24 hours",
+      "week": "Last 7 days",
+      "month": "Last 30 days"
+    },
+    "blocked": "Blocked: over budget",
+    "over_budget": "Over budget",
+    "last_used": "Used {{time}}",
+    "never_used": "Never used",
+    "name": "Name",
+    "budgets": "Budgets in USD",
+    "when_over": "Over budget",
+    "over_block": "Block requests",
+    "over_warn": "Allow and flag",
+    "invalid_amount": "Invalid amount",
+    "name_not_saved": "Name not saved",
+    "delete_title": "Delete key",
+    "delete_confirm": "Delete {{name}}?",
+    "key_exists": "Key already exists",
+    "profiles_empty": "No profiles yet",
+    "add_profile": "Add profile",
+    "edit_profile": "Edit profile",
+    "delete_profile": "Delete profile",
+    "delete_profile_confirm": "Delete {{name}}?",
+    "used_by_one": "{{count}} key",
+    "used_by_other": "{{count}} keys",
+    "no_rules": "No rules",
+    "rule_blocked": "blocked",
+    "rules": "Rules",
+    "rule": "Rule {{n}}",
+    "add_rule": "Add rule",
+    "move_rule_up": "Move rule {{n}} up",
+    "move_rule_down": "Move rule {{n}} down",
+    "delete_rule": "Delete rule {{n}}",
+    "models": "Models",
+    "model_n": "Model {{n}}",
+    "add_model": "Add model",
+    "remove_model": "Remove model {{n}}",
+    "effort": "Effort",
+    "any_effort": "Any",
+    "action": "Action",
+    "action_block": "Block",
+    "action_redirect": "Redirect",
+    "redirect_model": "Redirect to model",
+    "redirect_effort": "Redirect to effort",
+    "keep": "Keep",
+    "profile_errors": {
+      "name": "Name required",
+      "name_taken": "Name already used",
+      "models": "Rule {{rule}} has no model",
+      "target": "Rule {{rule}} has no redirect target"
+    },
+    "per_million": "USD per 1M tokens",
+    "price_source": "{{name}} · updated {{time}}",
+    "refresh_prices": "Refresh prices",
+    "unpriced_one": "{{count}} unpriced",
+    "unpriced_other": "{{count}} unpriced",
+    "prices_empty": "No models",
+    "model": "Model",
+    "input": "Input",
+    "output": "Output",
+    "cache_read": "Cache read",
+    "cache_write": "Cache write",
+    "origin": "Source",
+    "origins": {
+      "imported": "Imported",
+      "override": "Override",
+      "none": "None"
+    },
+    "reset_price": "Reset"
   }
 }

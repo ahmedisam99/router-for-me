@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "Учётные данные",
     "stats": "Статистика",
-    "models": "Модели"
+    "models": "Модели",
+    "keys": "Ключи"
   },
   "nav_meta": {
     "credentials": "Ключи, аккаунты и порядок выбора",
     "stats": "Запросы, токены и ошибки",
-    "models": "Карта моделей и псевдонимы"
+    "models": "Карта моделей и псевдонимы",
+    "keys": "Клиентские ключи, бюджеты и правила"
   },
   "credentials": {
     "title": "Учётные данные",
@@ -146,5 +148,103 @@
     "client_keys": "Клиентские API-ключи",
     "quota_eyebrow": "Лимиты",
     "quota_title": "Когда вернутся лимиты"
+  },
+  "keys_page": {
+    "title": "Ключи",
+    "on_count": "{{on}}/{{total}} включено",
+    "add_key": "Добавить ключ",
+    "tabs": {
+      "keys": "Ключи",
+      "profiles": "Профили",
+      "prices": "Цены"
+    },
+    "empty": "Ключей нет",
+    "copy": "Копировать {{name}}",
+    "enabled": "{{name}} включён",
+    "edit": "Изменить {{name}}",
+    "delete": "Удалить {{name}}",
+    "profile_of": "Профиль ключа {{name}}",
+    "no_profile": "Без профиля",
+    "windows": {
+      "5h": "5 ч",
+      "day": "24 ч",
+      "week": "7 дн",
+      "month": "30 дн"
+    },
+    "window_budgets": {
+      "5h": "За 5 часов",
+      "day": "За 24 часа",
+      "week": "За 7 дней",
+      "month": "За 30 дней"
+    },
+    "blocked": "Заблокирован: бюджет исчерпан",
+    "over_budget": "Бюджет превышен",
+    "last_used": "Использован {{time}}",
+    "never_used": "Не использовался",
+    "name": "Имя",
+    "budgets": "Бюджеты в USD",
+    "when_over": "При превышении бюджета",
+    "over_block": "Блокировать запросы",
+    "over_warn": "Пропускать и отмечать",
+    "invalid_amount": "Неверная сумма",
+    "name_not_saved": "Имя не сохранено",
+    "delete_title": "Удалить ключ",
+    "delete_confirm": "Удалить {{name}}?",
+    "key_exists": "Такой ключ уже есть",
+    "profiles_empty": "Профилей нет",
+    "add_profile": "Добавить профиль",
+    "edit_profile": "Изменить профиль",
+    "delete_profile": "Удалить профиль",
+    "delete_profile_confirm": "Удалить {{name}}?",
+    "used_by_one": "{{count}} ключ",
+    "used_by_few": "{{count}} ключа",
+    "used_by_many": "{{count}} ключей",
+    "used_by_other": "{{count}} ключа",
+    "no_rules": "Нет правил",
+    "rule_blocked": "блок",
+    "rules": "Правила",
+    "rule": "Правило {{n}}",
+    "add_rule": "Добавить правило",
+    "move_rule_up": "Переместить правило {{n}} вверх",
+    "move_rule_down": "Переместить правило {{n}} вниз",
+    "delete_rule": "Удалить правило {{n}}",
+    "models": "Модели",
+    "model_n": "Модель {{n}}",
+    "add_model": "Добавить модель",
+    "remove_model": "Убрать модель {{n}}",
+    "effort": "Уровень рассуждения",
+    "any_effort": "Любой",
+    "action": "Действие",
+    "action_block": "Блокировать",
+    "action_redirect": "Перенаправить",
+    "redirect_model": "Перенаправить на модель",
+    "redirect_effort": "Перенаправить на уровень",
+    "keep": "Без изменений",
+    "profile_errors": {
+      "name": "Нужно имя",
+      "name_taken": "Имя уже занято",
+      "models": "В правиле {{rule}} нет модели",
+      "target": "В правиле {{rule}} нет цели перенаправления"
+    },
+    "per_million": "USD за 1 млн токенов",
+    "price_source": "{{name}} · обновлено {{time}}",
+    "refresh_prices": "Обновить цены",
+    "unpriced_one": "{{count}} без цены",
+    "unpriced_few": "{{count}} без цены",
+    "unpriced_many": "{{count}} без цены",
+    "unpriced_other": "{{count}} без цены",
+    "prices_empty": "Моделей нет",
+    "model": "Модель",
+    "input": "Ввод",
+    "output": "Вывод",
+    "cache_read": "Чтение кэша",
+    "cache_write": "Запись в кэш",
+    "origin": "Источник",
+    "origins": {
+      "imported": "Импорт",
+      "override": "Своя",
+      "none": "Нет"
+    },
+    "reset_price": "Сбросить"
   }
 }

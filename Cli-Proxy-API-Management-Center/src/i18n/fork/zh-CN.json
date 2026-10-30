@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "凭证",
     "stats": "统计",
-    "models": "模型"
+    "models": "模型",
+    "keys": "密钥"
   },
   "nav_meta": {
     "credentials": "密钥、账号与调用顺序",
     "stats": "请求、令牌与错误",
-    "models": "模型映射与别名"
+    "models": "模型映射与别名",
+    "keys": "客户端密钥、预算与规则"
   },
   "credentials": {
     "title": "凭证",
@@ -125,5 +127,97 @@
     "client_keys": "客户端 API 密钥",
     "quota_eyebrow": "额度",
     "quota_title": "额度何时恢复"
+  },
+  "keys_page": {
+    "title": "密钥",
+    "on_count": "{{on}}/{{total}} 启用",
+    "add_key": "添加密钥",
+    "tabs": {
+      "keys": "密钥",
+      "profiles": "策略",
+      "prices": "价格"
+    },
+    "empty": "暂无密钥",
+    "copy": "复制 {{name}}",
+    "enabled": "{{name}} 启用",
+    "edit": "编辑 {{name}}",
+    "delete": "删除 {{name}}",
+    "profile_of": "{{name}} 的策略",
+    "no_profile": "无策略",
+    "windows": {
+      "5h": "5 小时",
+      "day": "24 小时",
+      "week": "7 天",
+      "month": "30 天"
+    },
+    "window_budgets": {
+      "5h": "最近 5 小时",
+      "day": "最近 24 小时",
+      "week": "最近 7 天",
+      "month": "最近 30 天"
+    },
+    "blocked": "已拦截：超出预算",
+    "over_budget": "超出预算",
+    "last_used": "{{time}}使用",
+    "never_used": "从未使用",
+    "name": "名称",
+    "budgets": "预算（美元）",
+    "when_over": "超出预算时",
+    "over_block": "拦截请求",
+    "over_warn": "放行并标记",
+    "invalid_amount": "金额无效",
+    "name_not_saved": "名称未保存",
+    "delete_title": "删除密钥",
+    "delete_confirm": "删除 {{name}}？",
+    "key_exists": "密钥已存在",
+    "profiles_empty": "暂无策略",
+    "add_profile": "添加策略",
+    "edit_profile": "编辑策略",
+    "delete_profile": "删除策略",
+    "delete_profile_confirm": "删除 {{name}}？",
+    "used_by_other": "{{count}} 个密钥",
+    "no_rules": "无规则",
+    "rule_blocked": "拦截",
+    "rules": "规则",
+    "rule": "规则 {{n}}",
+    "add_rule": "添加规则",
+    "move_rule_up": "上移规则 {{n}}",
+    "move_rule_down": "下移规则 {{n}}",
+    "delete_rule": "删除规则 {{n}}",
+    "models": "模型",
+    "model_n": "模型 {{n}}",
+    "add_model": "添加模型",
+    "remove_model": "移除模型 {{n}}",
+    "effort": "思考档位",
+    "any_effort": "任意",
+    "action": "动作",
+    "action_block": "拦截",
+    "action_redirect": "重定向",
+    "redirect_model": "重定向到模型",
+    "redirect_effort": "重定向到思考档位",
+    "keep": "保持不变",
+    "profile_errors": {
+      "name": "请填写名称",
+      "name_taken": "名称已被使用",
+      "models": "规则 {{rule}} 没有模型",
+      "target": "规则 {{rule}} 没有重定向目标"
+    },
+    "per_million": "美元 / 百万令牌",
+    "price_source": "{{name}} · {{time}}更新",
+    "refresh_prices": "刷新价格",
+    "unpriced_other": "{{count}} 个未定价",
+    "prices_empty": "暂无模型",
+    "model": "模型",
+    "input": "输入",
+    "output": "输出",
+    "cache_read": "缓存读取",
+    "cache_write": "缓存写入",
+    "origin": "来源",
+    "origins": {
+      "imported": "导入",
+      "override": "覆盖",
+      "none": "无"
+    },
+    "reset_price": "重置"
   }
 }

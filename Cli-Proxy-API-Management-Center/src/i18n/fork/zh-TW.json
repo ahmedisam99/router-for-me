@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "憑證",
     "stats": "統計",
-    "models": "模型"
+    "models": "模型",
+    "keys": "金鑰"
   },
   "nav_meta": {
     "credentials": "金鑰、帳號與呼叫順序",
     "stats": "請求、權杖與錯誤",
-    "models": "模型對應與別名"
+    "models": "模型對應與別名",
+    "keys": "用戶端金鑰、預算與規則"
   },
   "credentials": {
     "title": "憑證",
@@ -125,5 +127,97 @@
     "client_keys": "用戶端 API 金鑰",
     "quota_eyebrow": "額度",
     "quota_title": "額度何時恢復"
+  },
+  "keys_page": {
+    "title": "金鑰",
+    "on_count": "{{on}}/{{total}} 啟用",
+    "add_key": "新增金鑰",
+    "tabs": {
+      "keys": "金鑰",
+      "profiles": "策略",
+      "prices": "價格"
+    },
+    "empty": "尚無金鑰",
+    "copy": "複製 {{name}}",
+    "enabled": "{{name}} 啟用",
+    "edit": "編輯 {{name}}",
+    "delete": "刪除 {{name}}",
+    "profile_of": "{{name}} 的策略",
+    "no_profile": "無策略",
+    "windows": {
+      "5h": "5 小時",
+      "day": "24 小時",
+      "week": "7 天",
+      "month": "30 天"
+    },
+    "window_budgets": {
+      "5h": "最近 5 小時",
+      "day": "最近 24 小時",
+      "week": "最近 7 天",
+      "month": "最近 30 天"
+    },
+    "blocked": "已攔截：超出預算",
+    "over_budget": "超出預算",
+    "last_used": "{{time}}使用",
+    "never_used": "從未使用",
+    "name": "名稱",
+    "budgets": "預算（美元）",
+    "when_over": "超出預算時",
+    "over_block": "攔截請求",
+    "over_warn": "放行並標記",
+    "invalid_amount": "金額無效",
+    "name_not_saved": "名稱未儲存",
+    "delete_title": "刪除金鑰",
+    "delete_confirm": "刪除 {{name}}？",
+    "key_exists": "金鑰已存在",
+    "profiles_empty": "尚無策略",
+    "add_profile": "新增策略",
+    "edit_profile": "編輯策略",
+    "delete_profile": "刪除策略",
+    "delete_profile_confirm": "刪除 {{name}}？",
+    "used_by_other": "{{count}} 個金鑰",
+    "no_rules": "無規則",
+    "rule_blocked": "攔截",
+    "rules": "規則",
+    "rule": "規則 {{n}}",
+    "add_rule": "新增規則",
+    "move_rule_up": "上移規則 {{n}}",
+    "move_rule_down": "下移規則 {{n}}",
+    "delete_rule": "刪除規則 {{n}}",
+    "models": "模型",
+    "model_n": "模型 {{n}}",
+    "add_model": "新增模型",
+    "remove_model": "移除模型 {{n}}",
+    "effort": "思考等級",
+    "any_effort": "任意",
+    "action": "動作",
+    "action_block": "攔截",
+    "action_redirect": "重新導向",
+    "redirect_model": "重新導向至模型",
+    "redirect_effort": "重新導向至思考等級",
+    "keep": "保持不變",
+    "profile_errors": {
+      "name": "請填寫名稱",
+      "name_taken": "名稱已被使用",
+      "models": "規則 {{rule}} 沒有模型",
+      "target": "規則 {{rule}} 沒有重新導向目標"
+    },
+    "per_million": "美元 / 百萬權杖",
+    "price_source": "{{name}} · {{time}}更新",
+    "refresh_prices": "重新整理價格",
+    "unpriced_other": "{{count}} 個未定價",
+    "prices_empty": "尚無模型",
+    "model": "模型",
+    "input": "輸入",
+    "output": "輸出",
+    "cache_read": "快取讀取",
+    "cache_write": "快取寫入",
+    "origin": "來源",
+    "origins": {
+      "imported": "匯入",
+      "override": "覆寫",
+      "none": "無"
+    },
+    "reset_price": "重設"
   }
 }

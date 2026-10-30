@@ -3,6 +3,7 @@ import { HomePage } from '@/features/home/HomePage';
 import { ModelsPage } from '@/features/models/ModelsPage';
 import { ProvidersWorkbenchPage } from '@/features/providers/ProvidersWorkbenchPage';
 import { CredentialsPage } from '@/features/credentials/CredentialsPage';
+import { KeysPage } from '@/features/keys/KeysPage';
 import { AuthFilesOAuthExcludedEditPage } from '@/pages/AuthFilesOAuthExcludedEditPage';
 import { AuthFilesOAuthModelAliasEditPage } from '@/pages/AuthFilesOAuthModelAliasEditPage';
 import { QuotaPage } from '@/features/quota/QuotaPage';
@@ -19,11 +20,12 @@ const createMainRoutes = (supportsPlugin: boolean) => [
   { path: '/', element: <HomePage /> },
   { path: '/dashboard', element: <HomePage /> },
   { path: '/settings', element: <Navigate to="/config" replace /> },
-  { path: '/api-keys', element: <Navigate to="/config" replace /> },
+  { path: '/api-keys', element: <Navigate to="/keys" replace /> },
   { path: '/quick-start', element: <ProvidersWorkbenchPage fixedBrand="apikeyFun" /> },
   { path: '/quick-start/*', element: <Navigate to="/quick-start" replace /> },
   { path: '/credentials', element: <CredentialsPage /> },
   { path: '/models', element: <ModelsPage /> },
+  { path: '/keys', element: <KeysPage /> },
   { path: '/ai-providers', element: <Navigate to="/credentials" replace /> },
   { path: '/ai-providers/*', element: <Navigate to="/credentials" replace /> },
   { path: '/auth-files', element: <Navigate to="/credentials" replace /> },

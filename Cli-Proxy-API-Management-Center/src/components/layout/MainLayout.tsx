@@ -34,6 +34,7 @@ import {
   IconSidebarSystem,
   IconChevronDown,
   IconModelCluster,
+  IconKey,
 } from '@/components/ui/icons';
 import { INLINE_LOGO_JPEG } from '@/assets/logoInline';
 import {
@@ -71,6 +72,7 @@ const sidebarIcons: Record<string, ReactNode> = {
   system: <IconSidebarSystem size={18} />,
   stats: <IconChartColumn size={18} />,
   models: <IconModelCluster size={18} />,
+  keys: <IconKey size={18} />,
 };
 
 interface SidebarNavLinkItem {
@@ -636,6 +638,7 @@ export function MainLayout() {
           metaKey: 'nav_meta.models',
           icon: sidebarIcons.models,
         },
+        { path: '/keys', labelKey: 'nav.keys', metaKey: 'nav_meta.keys', icon: sidebarIcons.keys },
         ...(isApiKeyFunConfigured ? [quickStartNavItem] : []),
       ],
     },

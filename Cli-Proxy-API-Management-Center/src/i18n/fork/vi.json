@@ -2,12 +2,14 @@
   "nav": {
     "credentials": "Thông tin xác thực",
     "stats": "Thống kê",
-    "models": "Mô hình"
+    "models": "Mô hình",
+    "keys": "Khóa"
   },
   "nav_meta": {
     "credentials": "Khóa, tài khoản & thứ tự chọn",
     "stats": "Yêu cầu, token & lỗi",
-    "models": "Bản đồ mô hình & bí danh"
+    "models": "Bản đồ mô hình & bí danh",
+    "keys": "Khóa client, ngân sách và quy tắc"
   },
   "credentials": {
     "title": "Thông tin xác thực",
@@ -125,5 +127,97 @@
     "client_keys": "Khóa API của client",
     "quota_eyebrow": "Hạn mức",
     "quota_title": "Khi nào hạn mức phục hồi"
+  },
+  "keys_page": {
+    "title": "Khóa",
+    "on_count": "{{on}}/{{total}} đang bật",
+    "add_key": "Thêm khóa",
+    "tabs": {
+      "keys": "Khóa",
+      "profiles": "Hồ sơ",
+      "prices": "Giá"
+    },
+    "empty": "Chưa có khóa",
+    "copy": "Sao chép {{name}}",
+    "enabled": "Bật {{name}}",
+    "edit": "Sửa {{name}}",
+    "delete": "Xóa {{name}}",
+    "profile_of": "Hồ sơ của {{name}}",
+    "no_profile": "Không có hồ sơ",
+    "windows": {
+      "5h": "5 giờ",
+      "day": "24 giờ",
+      "week": "7 ngày",
+      "month": "30 ngày"
+    },
+    "window_budgets": {
+      "5h": "5 giờ qua",
+      "day": "24 giờ qua",
+      "week": "7 ngày qua",
+      "month": "30 ngày qua"
+    },
+    "blocked": "Đã chặn: vượt ngân sách",
+    "over_budget": "Vượt ngân sách",
+    "last_used": "Dùng {{time}}",
+    "never_used": "Chưa dùng",
+    "name": "Tên",
+    "budgets": "Ngân sách (USD)",
+    "when_over": "Khi vượt ngân sách",
+    "over_block": "Chặn yêu cầu",
+    "over_warn": "Cho qua và đánh dấu",
+    "invalid_amount": "Số tiền không hợp lệ",
+    "name_not_saved": "Chưa lưu được tên",
+    "delete_title": "Xóa khóa",
+    "delete_confirm": "Xóa {{name}}?",
+    "key_exists": "Khóa đã tồn tại",
+    "profiles_empty": "Chưa có hồ sơ",
+    "add_profile": "Thêm hồ sơ",
+    "edit_profile": "Sửa hồ sơ",
+    "delete_profile": "Xóa hồ sơ",
+    "delete_profile_confirm": "Xóa {{name}}?",
+    "used_by_other": "{{count}} khóa",
+    "no_rules": "Không có quy tắc",
+    "rule_blocked": "chặn",
+    "rules": "Quy tắc",
+    "rule": "Quy tắc {{n}}",
+    "add_rule": "Thêm quy tắc",
+    "move_rule_up": "Đưa quy tắc {{n}} lên",
+    "move_rule_down": "Đưa quy tắc {{n}} xuống",
+    "delete_rule": "Xóa quy tắc {{n}}",
+    "models": "Mô hình",
+    "model_n": "Mô hình {{n}}",
+    "add_model": "Thêm mô hình",
+    "remove_model": "Bỏ mô hình {{n}}",
+    "effort": "Mức suy luận",
+    "any_effort": "Bất kỳ",
+    "action": "Hành động",
+    "action_block": "Chặn",
+    "action_redirect": "Chuyển hướng",
+    "redirect_model": "Chuyển sang mô hình",
+    "redirect_effort": "Chuyển sang mức suy luận",
+    "keep": "Giữ nguyên",
+    "profile_errors": {
+      "name": "Cần có tên",
+      "name_taken": "Tên đã được dùng",
+      "models": "Quy tắc {{rule}} chưa có mô hình",
+      "target": "Quy tắc {{rule}} chưa có đích chuyển hướng"
+    },
+    "per_million": "USD cho 1 triệu token",
+    "price_source": "{{name}} · cập nhật {{time}}",
+    "refresh_prices": "Làm mới giá",
+    "unpriced_other": "{{count}} chưa có giá",
+    "prices_empty": "Không có mô hình",
+    "model": "Mô hình",
+    "input": "Vào",
+    "output": "Ra",
+    "cache_read": "Đọc bộ nhớ đệm",
+    "cache_write": "Ghi bộ nhớ đệm",
+    "origin": "Nguồn",
+    "origins": {
+      "imported": "Nhập",
+      "override": "Tùy chỉnh",
+      "none": "Không có"
+    },
+    "reset_price": "Đặt lại"
   }
 }

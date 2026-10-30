@@ -5,7 +5,7 @@ import {
   isRuntimeOnlyAuthFile,
 } from '@/features/authFiles/constants';
 import type { ProviderResource } from '@/features/providers/types';
-import type { RoutingCredential } from '@/services/api/routing';
+import type { RoutingCredential } from '@/services/api/credentialRouting';
 import type { AuthFileItem, OpenAIProviderConfig } from '@/types';
 import { isRecord } from '@/utils/helpers';
 

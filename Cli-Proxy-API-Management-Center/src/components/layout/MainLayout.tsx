@@ -17,7 +17,7 @@ import { Button } from '@/components/ui/Button';
 import { PageTransition } from '@/components/common/PageTransition';
 import { MainRoutes } from '@/router/MainRoutes';
 import { pluginsApi } from '@/services/api';
-import { routingApi } from '@/services/api/routing';
+import { credentialRoutingApi } from '@/services/api/credentialRouting';
 import { credentialCount } from '@/features/credentials/useCredentialRows';
 import { IconChartColumn } from '@/components/ui/extraIcons';
 import {
@@ -515,7 +515,7 @@ export function MainLayout() {
 
     try {
       const [credentials, config] = await Promise.all([
-        routingApi.listCredentials(),
+        credentialRoutingApi.listCredentials(),
         fetchConfig().catch(() => null),
       ]);
       if (requestID !== authFilesCountRequestRef.current) return;

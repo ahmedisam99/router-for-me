@@ -1,4 +1,4 @@
-import { canSetPriority, type RoutingCredential } from '@/services/api/routing';
+import { canSetPriority, type RoutingCredential } from '@/services/api/credentialRouting';
 
 export const moveItem = <T>(list: readonly T[], from: number, to: number): T[] => {
   const next = [...list];

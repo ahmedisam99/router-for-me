@@ -24,7 +24,7 @@ A reorder writes distinct priorities, from N at the top down to 1, so no ties ar
 list is the real order. Config keys get a key-level `priority` in `api-keys.<family>`;
 OpenAI-compatible providers only accept one at the group level, so all keys of such a group share
 it. Auth files take it through `PATCH /credentials/fields`. Runtime-only credentials can't hold a
-priority and keep theirs. See [`routing.ts`](../../Cli-Proxy-API-Management-Center/src/services/api/routing.ts)
+priority and keep theirs. See [`credentialRouting.ts`](../../Cli-Proxy-API-Management-Center/src/services/api/credentialRouting.ts)
 and [`order.ts`](../../Cli-Proxy-API-Management-Center/src/features/credentials/order.ts).
 
 Pinning removes rotation, which is right for `fill-first` and wrong for a round-robin setup. Revisit

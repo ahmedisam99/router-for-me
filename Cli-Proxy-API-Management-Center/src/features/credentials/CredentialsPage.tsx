@@ -24,7 +24,7 @@ import { useHeaderRefresh } from '@/hooks/useHeaderRefresh';
 import { useNow } from '@/hooks/useNow';
 import { authFilesApi } from '@/services/api/authFiles';
 import { providersApi } from '@/services/api/providers';
-import { canSetPriority, routingApi } from '@/services/api/routing';
+import { canSetPriority, credentialRoutingApi } from '@/services/api/credentialRouting';
 import { useAuthStore, useConfigStore, useNotificationStore, useThemeStore } from '@/stores';
 import type { OpenAIProviderConfig } from '@/types';
 import { copyToClipboard } from '@/utils/clipboard';
@@ -153,7 +153,7 @@ export function CredentialsPage() {
     setPendingOrder(next);
     setSaving(true);
     try {
-      await routingApi.setPriorities(changes);
+      await credentialRoutingApi.setPriorities(changes);
       await Promise.all([reload(), workbench.refetch()]);
       announceSettled();
     } catch (err) {

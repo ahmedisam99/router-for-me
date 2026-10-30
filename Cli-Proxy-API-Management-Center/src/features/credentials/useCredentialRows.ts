@@ -5,7 +5,7 @@ import {
   useProviderWorkbench,
 } from '@/features/providers/useProviderWorkbench';
 import { authFilesApi } from '@/services/api/authFiles';
-import { routingApi, type RoutingCredential } from '@/services/api/routing';
+import { credentialRoutingApi, type RoutingCredential } from '@/services/api/credentialRouting';
 import { useAuthStore } from '@/stores';
 import type { AuthFileItem, Config } from '@/types';
 import { buildCredentialRows } from './rows';
@@ -33,7 +33,7 @@ export function useCredentialRows() {
     if (connectionStatus !== 'connected') return;
     try {
       const [nextCredentials, fileList] = await Promise.all([
-        routingApi.listCredentials(),
+        credentialRoutingApi.listCredentials(),
         authFilesApi.list(),
       ]);
       if (request !== requestRef.current) return;

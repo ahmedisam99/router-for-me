@@ -105,7 +105,7 @@ const setConfigPriorities = async (priorities: Map<string, number>) => {
   }
 };
 
-export const routingApi = {
+export const credentialRoutingApi = {
   listCredentials: async (): Promise<RoutingCredential[]> => {
     const raw = await apiClient.get('/routing/models');
     const list = isRecord(raw) && Array.isArray(raw.credentials) ? raw.credentials : [];

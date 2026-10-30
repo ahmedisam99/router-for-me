@@ -17,7 +17,11 @@ import { buildModelMap, inactiveRoutes } from '@/features/models/modelMap';
 import { aliasTags, findAlias } from '@/features/models/scopes';
 import type { ProviderResource } from '@/features/providers/types';
 import { apiClient } from '@/services/api/client';
-import { canSetPriority, routingApi, type RoutingCredential } from '@/services/api/routing';
+import {
+  canSetPriority,
+  credentialRoutingApi,
+  type RoutingCredential,
+} from '@/services/api/credentialRouting';
 import type { QuotaFileEntry } from '@/features/quota/logic';
 import type { QuotaCardState } from '@/features/quota/providers';
 import type { AuthFileItem } from '@/types';
@@ -64,7 +68,7 @@ describe('routing API', () => {
         ],
       } as never)
     );
-    const [item, ...rest] = await routingApi.listCredentials();
+    const [item, ...rest] = await credentialRoutingApi.listCredentials();
     expect(rest).toEqual([]);
     expect(item).toMatchObject({ id: 'codex-a.json', authIndex: 'a1', priority: 3 });
     expect(item.models).toEqual([
@@ -93,7 +97,7 @@ describe('routing API', () => {
     const patch = spyOn(apiClient, 'patch').mockResolvedValue({} as never);
     spies.push(put, patch);
 
-    await routingApi.setPriorities([
+    await credentialRoutingApi.setPriorities([
       { credential: credential({ authIndex: 'c2' }), priority: 4 },
       { credential: credential({ authIndex: 'o1' }), priority: 2 },
       {

@@ -1,6 +1,6 @@
 # router-for-me
 
-My fork of the CLIProxyAPI stack: `CLIProxyAPI/` (Go backend: proxy, management API, plugin host) and `Cli-Proxy-API-Management-Center/` (React dashboard, shipped as one `management.html`). The goal is a better dashboard for me to work with. When the dashboard needs more from the backend, I write my own plugins and edit the core where a plugin can't do it. It is one repo of mine: both upstreams are git subtrees, and this file, `.claude/`, our plugins in `plugins/` and anything else we add live beside them.
+My fork of the CLIProxyAPI stack: `CLIProxyAPI/` (Go backend: proxy, management API, plugin host) and `Cli-Proxy-API-Management-Center/` (React dashboard, shipped as one `management.html`). The goal is a better dashboard for me to work with. When the dashboard needs more from the backend, we add it where it fits best, in a plugin of ours or in the core. It is one repo of mine: both upstreams are git subtrees, and this file, `.claude/`, our plugins in `plugins/` and anything else we add live beside them.
 
 ## A quick note
 
@@ -30,7 +30,6 @@ Follow them, except where this file says otherwise. Don't edit them: our guidanc
 
 Upstream ships more than one release a day and touches hundreds of files per minor version. Every line we change in an upstream file is a line that can conflict on the next sync.
 
-- **Dashboard first, then a plugin, then core.** A dashboard feature that needs backend data gets it from a plugin of ours (`management.register` routes under `/v0/management/...`). Edit the core when a plugin can't do the job.
 - **Our own plugins over third-party ones.** Use a third-party plugin only if it is open source, well maintained and not sketchy.
 - **Keep the diff against upstream small.** Put new logic in new files. When an upstream file must change, make the smallest hunk that works. Don't reformat, rename, move or tidy upstream code we don't need to touch. `scripts/fork-diff.sh` is the record of what the fork changes.
 - **Syncing.** `scripts/sync-upstream.sh` merges an upstream release into each subtree with `git subtree merge --squash` (see `docs/operations/syncing-upstream.md`). Never rebase or force-push `main`. The backend and dashboard move together, as a matching pair of releases: the dashboard only speaks the v8 management API, and a dashboard newer than its backend breaks.

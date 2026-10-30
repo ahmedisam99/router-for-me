@@ -114,11 +114,20 @@
     "applies_to": "作用范围",
     "scope_channel": "所有 {{provider}} 账号",
     "keep_original": "同时保留原名称",
+    "force_mapping": "在回复中把别名作为模型名称",
     "restricts_key": "此密钥将只提供其列出的模型",
     "oauth_alias_editor": "OAuth 别名编辑器",
     "status": {
       "disabled": "已停用",
       "not-served": "未提供"
+    },
+    "tags": {
+      "channel": "所有 {{provider}}",
+      "file": "此账号",
+      "key": "此密钥",
+      "both_names": "两个名称",
+      "alias_only": "仅别名",
+      "force_mapping": "回复显示别名"
     }
   },
   "home": {

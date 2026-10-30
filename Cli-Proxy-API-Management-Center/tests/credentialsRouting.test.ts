@@ -14,7 +14,7 @@ import {
   keysLeft,
 } from '@/features/credentials/rows';
 import { buildModelMap, inactiveRoutes } from '@/features/models/modelMap';
-import { findAlias } from '@/features/models/scopes';
+import { aliasTags, findAlias } from '@/features/models/scopes';
 import type { ProviderResource } from '@/features/providers/types';
 import { apiClient } from '@/services/api/client';
 import { canSetPriority, routingApi, type RoutingCredential } from '@/services/api/routing';
@@ -291,12 +291,14 @@ describe('inactive routes', () => {
     alias: 'opus',
     upstream: 'gpt',
     fork: true,
+    forceMapping: false,
   };
   const keyAlias = {
     scope: { kind: 'key' as const, authIndex: 'k1' },
     alias: 'fable',
     upstream: 'opus',
     fork: false,
+    forceMapping: false,
   };
 
   test("adds a disabled key's list and aliases an account doesn't serve, not served ones", () => {
@@ -318,6 +320,27 @@ describe('inactive routes', () => {
     const fable = map.find((entry) => entry.id === 'fable');
     expect(fable?.live).toBe(false);
     expect(fable?.routes[0]).toMatchObject({ rank: 0, inactive: 'disabled' });
+  });
+
+  test('tags an alias with where it applies, its names and its replies', () => {
+    const t = ((key: string, values?: { provider?: string }) =>
+      values?.provider ? `${key}:${values.provider}` : key) as unknown as TFunction;
+    expect(aliasTags(channelAlias, t)).toEqual([
+      'models_page.tags.channel:Codex',
+      'models_page.tags.both_names',
+    ]);
+    const fileAlias = {
+      ...channelAlias,
+      scope: { kind: 'file' as const, name: 'codex.json' },
+      fork: false,
+      forceMapping: true,
+    };
+    expect(aliasTags(fileAlias, t)).toEqual([
+      'models_page.tags.file',
+      'models_page.tags.alias_only',
+      'models_page.tags.force_mapping',
+    ]);
+    expect(aliasTags(keyAlias, t)).toEqual(['models_page.tags.key']);
   });
 
   test('finds the definition behind a renamed route', () => {

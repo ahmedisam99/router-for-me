@@ -109,3 +109,20 @@ export function findAlias(
     }) ?? null
   );
 }
+
+/**
+ * The tags a credential pill shows for the alias behind it: where it applies, for OAuth whether
+ * the upstream name works too, and whether replies name the alias.
+ */
+export function aliasTags(alias: ModelAlias, t: TFunction): string[] {
+  const tags = [
+    alias.scope.kind === 'channel'
+      ? t('models_page.tags.channel', { provider: getTypeLabel(t, alias.scope.channel) })
+      : t(`models_page.tags.${alias.scope.kind}`),
+  ];
+  if (alias.scope.kind !== 'key') {
+    tags.push(t(alias.fork ? 'models_page.tags.both_names' : 'models_page.tags.alias_only'));
+  }
+  if (alias.forceMapping) tags.push(t('models_page.tags.force_mapping'));
+  return tags;
+}

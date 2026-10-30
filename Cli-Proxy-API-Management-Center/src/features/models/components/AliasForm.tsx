@@ -37,6 +37,7 @@ export function AliasForm({ options, editing, onClose, onSubmit, onDelete }: Ali
   const [alias, setAlias] = useState(editing?.alias ?? '');
   const [upstream, setUpstream] = useState(editing?.upstream ?? '');
   const [fork, setFork] = useState(editing?.fork ?? true);
+  const [forceMapping, setForceMapping] = useState(editing?.forceMapping ?? false);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
 
@@ -52,7 +53,7 @@ export function AliasForm({ options, editing, onClose, onSubmit, onDelete }: Ali
     setSaving(true);
     setError('');
     try {
-      await onSubmit(scope, { alias, upstream, fork });
+      await onSubmit(scope, { alias, upstream, fork, forceMapping });
       onClose();
     } catch (err) {
       setError(err instanceof Error ? err.message : String(err));
@@ -135,6 +136,11 @@ export function AliasForm({ options, editing, onClose, onSubmit, onDelete }: Ali
         {scope && scope.kind !== 'key' ? (
           <ToggleSwitch checked={fork} onChange={setFork} label={t('models_page.keep_original')} />
         ) : null}
+        <ToggleSwitch
+          checked={forceMapping}
+          onChange={setForceMapping}
+          label={t('models_page.force_mapping')}
+        />
         {!editing && option?.restrictsKey ? (
           <p className={styles.formNote}>{t('models_page.restricts_key')}</p>
         ) : null}

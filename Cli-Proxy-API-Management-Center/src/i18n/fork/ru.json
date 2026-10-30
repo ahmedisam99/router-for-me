@@ -135,11 +135,20 @@
     "applies_to": "Применяется к",
     "scope_channel": "Все аккаунты {{provider}}",
     "keep_original": "Сохранить и исходное имя",
+    "force_mapping": "Указывать псевдоним как модель в ответах",
     "restricts_key": "После этого ключ будет обслуживать только перечисленные модели",
     "oauth_alias_editor": "Редактор псевдонимов OAuth",
     "status": {
       "disabled": "Отключено",
       "not-served": "Не обслуживается"
+    },
+    "tags": {
+      "channel": "Все {{provider}}",
+      "file": "Этот аккаунт",
+      "key": "Этот ключ",
+      "both_names": "Оба имени",
+      "alias_only": "Только псевдоним",
+      "force_mapping": "В ответах псевдоним"
     }
   },
   "home": {

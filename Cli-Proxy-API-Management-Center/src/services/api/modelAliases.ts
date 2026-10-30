@@ -27,12 +27,15 @@ export interface ModelAlias {
   upstream: string;
   /** OAuth only: keep serving the upstream name too. */
   fork: boolean;
+  /** Replies name the alias as their model instead of the upstream model. */
+  forceMapping: boolean;
 }
 
 export interface AliasChange {
   alias: string;
   upstream: string;
   fork: boolean;
+  forceMapping: boolean;
 }
 
 export const scopeKey = (scope: AliasScope): string =>
@@ -50,7 +53,15 @@ const aliasesIn = (list: unknown, scope: AliasScope): ModelAlias[] =>
     const upstream = text(entry.name);
     const alias = text(entry.alias);
     if (!upstream || !alias || alias === upstream) return [];
-    return [{ scope, alias, upstream, fork: entry.fork === true }];
+    return [
+      {
+        scope,
+        alias,
+        upstream,
+        fork: entry.fork === true,
+        forceMapping: entry['force-mapping'] === true,
+      },
+    ];
   });
 
 /** Aliases in the api-keys tree of a raw v8 config. A list a group shares is reported once. */
@@ -126,6 +137,8 @@ export function editAliasList(
   entry.alias = change.alias.trim();
   if (withFork && change.fork) entry.fork = true;
   else delete entry.fork;
+  if (change.forceMapping) entry['force-mapping'] = true;
+  else delete entry['force-mapping'];
   if (index >= 0) next[index] = entry;
   else next.push(entry);
   return next;
@@ -239,6 +252,7 @@ export const modelAliasesApi = {
           alias: entry.alias,
           upstream: entry.name,
           fork: entry.fork === true,
+          forceMapping: entry.forceMapping === true,
         }))
     );
     const perFile = files.flatMap(({ name, aliases }) =>
@@ -252,6 +266,7 @@ export const modelAliasesApi = {
                 alias,
                 upstream,
                 fork: entry.fork === true,
+                forceMapping: entry['force-mapping'] === true,
               },
             ]
           : [];

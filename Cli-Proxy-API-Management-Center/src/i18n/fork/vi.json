@@ -114,11 +114,20 @@
     "applies_to": "Áp dụng cho",
     "scope_channel": "Tất cả tài khoản {{provider}}",
     "keep_original": "Giữ cả tên gốc",
+    "force_mapping": "Ghi bí danh làm tên mô hình trong phản hồi",
     "restricts_key": "Khóa này sau đó chỉ phục vụ các mô hình được liệt kê",
     "oauth_alias_editor": "Trình sửa bí danh OAuth",
     "status": {
       "disabled": "Đã tắt",
       "not-served": "Không được phục vụ"
+    },
+    "tags": {
+      "channel": "Tất cả {{provider}}",
+      "file": "Tài khoản này",
+      "key": "Khóa này",
+      "both_names": "Cả hai tên",
+      "alias_only": "Chỉ bí danh",
+      "force_mapping": "Phản hồi ghi bí danh"
     }
   },
   "home": {

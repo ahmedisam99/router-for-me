@@ -32,7 +32,7 @@ const config = () => ({
     'openai-compatibility': [
       {
         name: 'router',
-        models: [{ name: 'z-ai/glm', alias: 'glm' }],
+        models: [{ name: 'z-ai/glm', alias: 'glm', 'force-mapping': true }],
         keys: [
           { 'api-key': 'k2', auth_index: 'o1' },
           { 'api-key': 'k3', auth_index: 'o2' },
@@ -45,8 +45,20 @@ const config = () => ({
 describe('alias lists', () => {
   test('reads key aliases, reporting a list a group shares once', () => {
     expect(keyAliasesFromConfig(config())).toEqual([
-      { scope: { kind: 'key', authIndex: 'c1' }, alias: 'fable', upstream: 'opus', fork: false },
-      { scope: { kind: 'key', authIndex: 'o1' }, alias: 'glm', upstream: 'z-ai/glm', fork: false },
+      {
+        scope: { kind: 'key', authIndex: 'c1' },
+        alias: 'fable',
+        upstream: 'opus',
+        fork: false,
+        forceMapping: false,
+      },
+      {
+        scope: { kind: 'key', authIndex: 'o1' },
+        alias: 'glm',
+        upstream: 'z-ai/glm',
+        fork: false,
+        forceMapping: true,
+      },
     ]);
   });
 
@@ -60,16 +72,18 @@ describe('alias lists', () => {
   });
 
   test('adds, edits and removes one entry, keeping its other fields', () => {
-    const list = [{ name: 'opus' }, { name: 'opus', alias: 'fable', thinking: 'high' }];
-    expect(editAliasList(list, null, { alias: 'a', upstream: 'b', fork: true }, true)).toEqual([
-      ...list,
-      { name: 'b', alias: 'a', fork: true },
-    ]);
+    const list = [
+      { name: 'opus' },
+      { name: 'opus', alias: 'fable', thinking: 'high', 'force-mapping': true },
+    ];
+    expect(
+      editAliasList(list, null, { alias: 'a', upstream: 'b', fork: true, forceMapping: true }, true)
+    ).toEqual([...list, { name: 'b', alias: 'a', fork: true, 'force-mapping': true }]);
     expect(
       editAliasList(
         list,
         { alias: 'fable', upstream: 'opus' },
-        { alias: 'fable-2', upstream: 'opus', fork: true },
+        { alias: 'fable-2', upstream: 'opus', fork: true, forceMapping: false },
         false
       )
     ).toEqual([{ name: 'opus' }, { name: 'opus', alias: 'fable-2', thinking: 'high' }]);
@@ -100,6 +114,7 @@ describe('model aliases API', () => {
       alias: 'sonnet',
       upstream: 'opus',
       fork: true,
+      forceMapping: false,
     });
 
     expect(put).toHaveBeenCalledWith('/config/api-keys/claude', [
@@ -134,8 +149,14 @@ describe('model aliases API', () => {
 
     await modelAliasesApi.save(
       { kind: 'channel', channel: 'codex' },
-      { scope: { kind: 'channel', channel: 'codex' }, alias: 'opus', upstream: 'gpt', fork: true },
-      { alias: 'opus', upstream: 'gpt', fork: false }
+      {
+        scope: { kind: 'channel', channel: 'codex' },
+        alias: 'opus',
+        upstream: 'gpt',
+        fork: true,
+        forceMapping: false,
+      },
+      { alias: 'opus', upstream: 'gpt', fork: false, forceMapping: false }
     );
     expect(put).toHaveBeenCalledWith('/config/oauth/model-alias', {
       'gemini-cli': [{ name: 'pro', alias: 'g' }],
@@ -157,7 +178,13 @@ describe('model aliases API', () => {
 
     await modelAliasesApi.save(
       { kind: 'channel', channel: 'codex' },
-      { scope: { kind: 'channel', channel: 'codex' }, alias: 'opus', upstream: 'gpt', fork: true },
+      {
+        scope: { kind: 'channel', channel: 'codex' },
+        alias: 'opus',
+        upstream: 'gpt',
+        fork: true,
+        forceMapping: false,
+      },
       null
     );
     expect(put).toHaveBeenCalledWith('/config/oauth/model-alias', {});
@@ -176,11 +203,12 @@ describe('model aliases API', () => {
       alias: 'haiku',
       upstream: 'gpt',
       fork: false,
+      forceMapping: true,
     });
     expect(patch).toHaveBeenCalledWith('a.json', {
       model_aliases: [
         { name: 'gpt', alias: 'opus' },
-        { name: 'gpt', alias: 'haiku' },
+        { name: 'gpt', alias: 'haiku', 'force-mapping': true },
       ],
     });
   });

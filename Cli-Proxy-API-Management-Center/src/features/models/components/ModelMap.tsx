@@ -7,6 +7,7 @@ import { CredentialLogo } from '@/features/credentials/components/CredentialLogo
 import type { ModelAlias } from '@/services/api/modelAliases';
 import type { ResolvedTheme } from '@/types';
 import type { ModelEntry, ModelRoute } from '../modelMap';
+import { aliasTags } from '../scopes';
 import styles from '../ModelsPage.module.scss';
 
 interface ModelMapProps {
@@ -56,6 +57,13 @@ export function ModelMap({ entries, theme, aliasFor, onEditAlias }: ModelMapProp
         {renamedTo.length > 0 ? (
           <span className={styles.upstream}>→ {renamedTo.join(', ')}</span>
         ) : null}
+        {alias
+          ? aliasTags(alias, t).map((tag) => (
+              <span key={tag} className={styles.statusTag}>
+                {tag}
+              </span>
+            ))
+          : null}
         {route.inactive ? (
           <span className={styles.statusTag}>{t(`models_page.status.${route.inactive}`)}</span>
         ) : null}

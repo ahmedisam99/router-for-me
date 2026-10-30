@@ -114,11 +114,20 @@
     "applies_to": "적용 대상",
     "scope_channel": "모든 {{provider}} 계정",
     "keep_original": "원래 이름도 유지",
+    "force_mapping": "응답에서 별칭을 모델 이름으로 표시",
     "restricts_key": "이 키는 이후 나열된 모델만 제공합니다",
     "oauth_alias_editor": "OAuth 별칭 편집기",
     "status": {
       "disabled": "비활성",
       "not-served": "제공되지 않음"
+    },
+    "tags": {
+      "channel": "모든 {{provider}}",
+      "file": "이 계정",
+      "key": "이 키",
+      "both_names": "두 이름 모두",
+      "alias_only": "별칭만",
+      "force_mapping": "응답에 별칭 표시"
     }
   },
   "home": {

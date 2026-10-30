@@ -121,11 +121,20 @@
     "applies_to": "Applies to",
     "scope_channel": "All {{provider}} accounts",
     "keep_original": "Keep the original name too",
+    "force_mapping": "Name the alias as the model in replies",
     "restricts_key": "This key will then serve only the models listed for it",
     "oauth_alias_editor": "OAuth alias editor",
     "status": {
       "disabled": "Disabled",
       "not-served": "Not served"
+    },
+    "tags": {
+      "channel": "All {{provider}}",
+      "file": "This account",
+      "key": "This key",
+      "both_names": "Both names",
+      "alias_only": "Alias only",
+      "force_mapping": "Replies show alias"
     }
   },
   "home": {

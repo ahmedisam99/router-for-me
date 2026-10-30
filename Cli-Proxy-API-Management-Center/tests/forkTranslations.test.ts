@@ -1,21 +1,13 @@
 import { describe, expect, test } from 'bun:test';
+import { readFileSync } from 'node:fs';
 import { forkBundles } from '@/i18n/fork';
-import en from '@/i18n/locales/en.json';
-import ko from '@/i18n/locales/ko.json';
-import ru from '@/i18n/locales/ru.json';
-import vi from '@/i18n/locales/vi.json';
-import zhCN from '@/i18n/locales/zh-CN.json';
-import zhTW from '@/i18n/locales/zh-TW.json';
 import { isRecord } from '@/utils/helpers';
 
-const upstreamBundles: Record<string, object> = {
-  'zh-CN': zhCN,
-  'zh-TW': zhTW,
-  en,
-  ru,
-  vi,
-  ko,
-};
+// Read from disk: once a test loads i18n, i18next has merged the fork into the imported bundles.
+const upstreamBundle = (language: string): unknown =>
+  JSON.parse(
+    readFileSync(new URL(`../src/i18n/locales/${language}.json`, import.meta.url), 'utf8')
+  );
 
 const paths = (value: unknown, prefix = ''): string[] =>
   isRecord(value)
@@ -35,7 +27,7 @@ describe('fork translations', () => {
 
   // addForkTranslations never overwrites, so a key upstream also has would be silently ignored.
   test.each(Object.keys(forkBundles))('%s adds only keys upstream lacks', (language) => {
-    const upstream = new Set(paths(upstreamBundles[language]));
+    const upstream = new Set(paths(upstreamBundle(language)));
     expect(paths(forkBundles[language]).filter((path) => upstream.has(path))).toEqual([]);
   });
 });

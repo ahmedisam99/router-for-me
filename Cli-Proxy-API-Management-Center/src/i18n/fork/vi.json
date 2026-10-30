@@ -3,7 +3,8 @@
     "credentials": "Thông tin xác thực",
     "stats": "Thống kê",
     "models": "Mô hình",
-    "keys": "Khóa"
+    "keys": "Khóa",
+    "system_info": "Thông tin"
   },
   "nav_meta": {
     "credentials": "Khóa, tài khoản & thứ tự chọn",

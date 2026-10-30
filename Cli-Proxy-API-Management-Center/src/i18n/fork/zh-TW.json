@@ -3,7 +3,8 @@
     "credentials": "憑證",
     "stats": "統計",
     "models": "模型",
-    "keys": "金鑰"
+    "keys": "金鑰",
+    "system_info": "資訊"
   },
   "nav_meta": {
     "credentials": "金鑰、帳號與呼叫順序",

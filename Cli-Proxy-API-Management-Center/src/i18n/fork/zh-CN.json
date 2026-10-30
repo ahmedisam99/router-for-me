@@ -3,7 +3,8 @@
     "credentials": "凭证",
     "stats": "统计",
     "models": "模型",
-    "keys": "密钥"
+    "keys": "密钥",
+    "system_info": "信息"
   },
   "nav_meta": {
     "credentials": "密钥、账号与调用顺序",

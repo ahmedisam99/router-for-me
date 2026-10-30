@@ -3,7 +3,8 @@
     "credentials": "자격 증명",
     "stats": "통계",
     "models": "모델",
-    "keys": "키"
+    "keys": "키",
+    "system_info": "정보"
   },
   "nav_meta": {
     "credentials": "키, 계정 및 선택 순서",

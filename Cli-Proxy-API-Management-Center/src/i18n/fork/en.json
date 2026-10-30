@@ -3,7 +3,8 @@
     "credentials": "Credentials",
     "stats": "Stats",
     "models": "Models",
-    "keys": "Keys"
+    "keys": "Keys",
+    "system_info": "Info"
   },
   "nav_meta": {
     "credentials": "Keys, accounts & pick order",

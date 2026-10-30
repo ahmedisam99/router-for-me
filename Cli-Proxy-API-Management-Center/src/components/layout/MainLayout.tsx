@@ -614,6 +614,12 @@ export function MainLayout() {
           metaKey: 'nav_meta.dashboard',
           icon: sidebarIcons.dashboard,
         },
+        {
+          path: '/system',
+          labelKey: 'nav.system_info',
+          metaKey: 'nav_meta.system_info',
+          icon: sidebarIcons.system,
+        },
         ...(!isApiKeyFunConfigured ? [quickStartNavItem] : []),
       ],
     },
@@ -692,12 +698,6 @@ export function MainLayout() {
               },
             ]
           : []),
-        {
-          path: '/system',
-          labelKey: 'nav.system_info',
-          metaKey: 'nav_meta.system_info',
-          icon: sidebarIcons.system,
-        },
       ],
     },
     ...(pluginPageNavItems.length > 0

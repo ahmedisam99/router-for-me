@@ -1,59 +1,26 @@
 {
   "nav": {
-    "credentials": "자격 증명",
     "stats": "통계",
     "models": "모델",
     "keys": "키",
     "info": "정보"
   },
   "nav_meta": {
-    "credentials": "키, 계정 및 선택 순서",
     "stats": "요청, 토큰 및 오류",
     "models": "모델 맵 및 별칭",
     "keys": "클라이언트 키, 예산 및 규칙"
   },
   "credentials": {
-    "title": "자격 증명",
-    "count_other": "자격 증명 {{count}}개",
-    "active_count": "{{active}}/{{total}} 활성",
     "strategy": {
       "fill-first": "순차 채우기",
       "round-robin": "라운드 로빈",
       "weighted-round-robin": "가중 라운드 로빈"
     },
-    "empty": "자격 증명 없음",
-    "move": "{{name}} 이동",
-    "enabled": "{{name}} 사용",
-    "models_other": "모델 {{count}}개",
     "kind": {
-      "apikey": "API 키",
-      "oauth": "OAuth"
+      "apikey": "API 키"
     },
-    "status": {
-      "active": "활성",
-      "disabled": "비활성",
-      "cooling": "{{time}}까지 대기",
-      "error": "오류",
-      "unavailable": "사용 불가",
-      "no_models": "모델 없음",
-      "limited": "제한됨 · {{time}}"
-    },
-    "delete_title": "자격 증명 삭제",
-    "delete_confirm": "{{name}}을(를) 삭제할까요?",
-    "add_title": "자격 증명 추가",
     "add_oauth": "로그인",
-    "add_upload": "인증 파일 업로드",
-    "add_api_key": "API 키",
-    "add_import": "가져오기",
-    "details": "{{name}} 세부 정보",
-    "refresh_token": "토큰 새로 고침",
-    "download": "다운로드",
-    "search": "자격 증명 검색",
-    "no_match": "일치하는 자격 증명 없음",
-    "select_mode": "선택",
-    "select_done": "완료",
-    "refresh_tokens": "토큰 새로고침",
-    "delete_many_confirm_other": "자격 증명 {{count}}개를 삭제할까요?"
+    "add_import": "가져오기"
   },
   "model_map": {
     "title": "모델",
@@ -61,7 +28,6 @@
     "alias": "별칭",
     "search": "모델 검색",
     "aliases_only": "별칭만",
-    "oauth_aliases": "OAuth 별칭",
     "oauth_exclusions": "OAuth 제외",
     "empty": "모델 없음",
     "no_match": "일치하는 모델 없음",
@@ -133,7 +99,6 @@
   "home": {
     "last_24h": "최근 24시간",
     "open_stats": "통계 열기",
-    "open_credentials": "자격 증명 열기",
     "client_keys": "클라이언트 API 키",
     "quota_eyebrow": "할당량",
     "quota_title": "용량이 돌아오는 시점"

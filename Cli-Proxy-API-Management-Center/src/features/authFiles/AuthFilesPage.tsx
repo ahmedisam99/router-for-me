@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useInterval } from '@/hooks/useInterval';
 import { useHeaderRefresh } from '@/hooks/useHeaderRefresh';
+import { SignInSheet } from '@/features/credentials/components/SignInSheet';
 import { useRevealOnScroll } from '@/hooks/motion';
 import { usePageTransitionLayer } from '@/components/common/PageTransitionLayer';
 import { Button } from '@/components/ui/Button';
@@ -379,6 +380,8 @@ export function AuthFilesPage() {
     loadModelAlias();
   }, [isCurrentLayer, loadFiles, loadExcluded, loadModelAlias]);
 
+  const [signInOpen, setSignInOpen] = useState(false);
+
   useInterval(
     () => {
       void loadFiles({ background: true }).catch(() => {});
@@ -599,6 +602,14 @@ export function AuthFilesPage() {
         refreshingCredentials={refreshingAllCredentials}
         credentialRefreshDisabled={Object.keys(manualRefreshing).length > 0}
         onRefreshCredentials={handleRefreshAllCredentials}
+        onSignIn={() => setSignInOpen(true)}
+      />
+      <SignInSheet
+        open={signInOpen}
+        onClose={() => {
+          setSignInOpen(false);
+          void loadFiles({ background: true }).catch(() => {});
+        }}
       />
       <AuthFileRefreshResults results={refreshResults} onClose={closeRefreshResults} />
       <input

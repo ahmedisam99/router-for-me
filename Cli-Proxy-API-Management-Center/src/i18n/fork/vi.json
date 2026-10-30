@@ -1,59 +1,26 @@
 {
   "nav": {
-    "credentials": "Thông tin xác thực",
     "stats": "Thống kê",
     "models": "Mô hình",
     "keys": "Khóa",
     "info": "Thông tin"
   },
   "nav_meta": {
-    "credentials": "Khóa, tài khoản & thứ tự chọn",
     "stats": "Yêu cầu, token & lỗi",
     "models": "Bản đồ mô hình & bí danh",
     "keys": "Khóa client, ngân sách và quy tắc"
   },
   "credentials": {
-    "title": "Thông tin xác thực",
-    "count_other": "{{count}} thông tin xác thực",
-    "active_count": "{{active}}/{{total}} đang bật",
     "strategy": {
       "fill-first": "Lấp đầy trước",
       "round-robin": "Xoay vòng",
       "weighted-round-robin": "Xoay vòng có trọng số"
     },
-    "empty": "Chưa có thông tin xác thực",
-    "move": "Di chuyển {{name}}",
-    "enabled": "Bật {{name}}",
-    "models_other": "{{count}} mô hình",
     "kind": {
-      "apikey": "Khóa API",
-      "oauth": "OAuth"
+      "apikey": "Khóa API"
     },
-    "status": {
-      "active": "Hoạt động",
-      "disabled": "Đã tắt",
-      "cooling": "Tạm nghỉ đến {{time}}",
-      "error": "Lỗi",
-      "unavailable": "Không khả dụng",
-      "no_models": "Không có mô hình",
-      "limited": "Hết hạn mức · {{time}}"
-    },
-    "delete_title": "Xóa thông tin xác thực",
-    "delete_confirm": "Xóa {{name}}?",
-    "add_title": "Thêm thông tin xác thực",
     "add_oauth": "Đăng nhập",
-    "add_upload": "Tải lên tệp xác thực",
-    "add_api_key": "Khóa API",
-    "add_import": "Nhập",
-    "details": "Chi tiết {{name}}",
-    "refresh_token": "Làm mới token",
-    "download": "Tải xuống",
-    "search": "Tìm thông tin xác thực",
-    "no_match": "Không có thông tin xác thực phù hợp",
-    "select_mode": "Chọn",
-    "select_done": "Xong",
-    "refresh_tokens": "Làm mới token",
-    "delete_many_confirm_other": "Xóa {{count}} thông tin xác thực?"
+    "add_import": "Nhập"
   },
   "model_map": {
     "title": "Mô hình",
@@ -61,7 +28,6 @@
     "alias": "bí danh",
     "search": "Tìm mô hình",
     "aliases_only": "Chỉ bí danh",
-    "oauth_aliases": "Bí danh OAuth",
     "oauth_exclusions": "Loại trừ OAuth",
     "empty": "Không có mô hình",
     "no_match": "Không có mô hình phù hợp",
@@ -133,7 +99,6 @@
   "home": {
     "last_24h": "24 giờ qua",
     "open_stats": "Mở thống kê",
-    "open_credentials": "Mở thông tin xác thực",
     "client_keys": "Khóa API của client",
     "quota_eyebrow": "Hạn mức",
     "quota_title": "Khi nào hạn mức phục hồi"

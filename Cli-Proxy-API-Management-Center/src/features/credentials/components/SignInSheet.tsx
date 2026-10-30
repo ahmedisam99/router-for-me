@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import iconCodex from '@/assets/icons/codex.svg';
 import iconVertex from '@/assets/icons/vertex.svg';
 import { Sheet } from '@/components/ui/Sheet';
-import { IconUpload } from '@/components/ui/icons';
+import { notifyAuthFilesChanged } from '@/features/authFiles/authFilesEvents';
 import { OAuthFlowDialog } from '@/features/oauth/components/OAuthFlowDialog';
 import { ProviderTile } from '@/features/oauth/components/ProviderTile';
 import { SiwcBindDialog } from '@/features/oauth/components/SiwcBindDialog';
@@ -17,37 +17,23 @@ import {
   supportsManualCallback,
   type OAuthProviderCard,
 } from '@/features/oauth/providers';
-import { PROVIDER_LOGOS } from '@/features/providers/brandLogos';
-import type { ProviderBrand } from '@/features/providers/types';
-import { useAuthStore } from '@/stores';
-import type { ResolvedTheme } from '@/types';
-import styles from '../CredentialsPage.module.scss';
+import { useAuthStore, useThemeStore } from '@/stores';
+import styles from './SignInSheet.module.scss';
 
 const VERTEX_DIALOG_ID = '__vertex__';
 
 type DialogTarget = { kind: 'oauth'; id: string } | { kind: 'vertex' };
 
-interface AddCredentialSheetProps {
+interface SignInSheetProps {
   open: boolean;
-  brands: ProviderBrand[];
-  theme: ResolvedTheme;
   onClose: () => void;
-  onUpload: (files: File[]) => void;
-  onApiKey: (brand: ProviderBrand) => void;
 }
 
-/** Every way to add a credential: OAuth sign-in and imports mirror the old OAuth page. */
-export function AddCredentialSheet({
-  open,
-  brands,
-  theme,
-  onClose,
-  onUpload,
-  onApiKey,
-}: AddCredentialSheetProps) {
+/** Signs in a new account, as upstream's OAuth page does, from the Auth Files page. */
+export function SignInSheet({ open, onClose: close }: SignInSheetProps) {
   const { t } = useTranslation();
   const apiBase = useAuthStore((state) => state.apiBase);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const theme = useThemeStore((state) => state.resolvedTheme);
   const focusedRef = useRef<string | null>(null);
   const [dialog, setDialog] = useState<DialogTarget | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -112,6 +98,11 @@ export function AddCredentialSheet({
     focusedRef.current = null;
     setDialogOpen(false);
   };
+  // The sidebar's auth file count listens for this; the page reloads its list itself.
+  const onClose = () => {
+    notifyAuthFilesChanged();
+    close();
+  };
   const showCredentials = () => {
     closeDialog();
     onClose();
@@ -126,10 +117,9 @@ export function AddCredentialSheet({
 
   return (
     <>
-      <Sheet open={open} onClose={onClose} size="lg" title={t('credentials.add_title')}>
-        <section className={styles.addSection}>
-          <h3 className={styles.addHeading}>{t('credentials.add_oauth')}</h3>
-          <div className={styles.addTiles}>
+      <Sheet open={open} onClose={onClose} size="lg" title={t('credentials.add_oauth')}>
+        <section className={styles.section}>
+          <div className={styles.tiles}>
             {providerCards.map((card, index) => (
               <ProviderTile
                 key={card.id}
@@ -152,56 +142,13 @@ export function AddCredentialSheet({
           </div>
         </section>
 
-        <section className={styles.addSection}>
-          <h3 className={styles.addHeading}>{t('credentials.add_import')}</h3>
-          <div className={styles.addGrid}>
-            <button
-              type="button"
-              className={styles.addOption}
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <IconUpload size={18} />
-              <span>{t('credentials.add_upload')}</span>
-            </button>
-            <button type="button" className={styles.addOption} onClick={openVertex}>
-              <img src={iconVertex} alt="" aria-hidden="true" className={styles.addLogo} />
+        <section className={styles.section}>
+          <h3 className={styles.heading}>{t('credentials.add_import')}</h3>
+          <div className={styles.grid}>
+            <button type="button" className={styles.option} onClick={openVertex}>
+              <img src={iconVertex} alt="" aria-hidden="true" className={styles.logo} />
               <span>{t('vertex_import.title')}</span>
             </button>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept=".json,application/json"
-              multiple
-              hidden
-              onChange={(event) => {
-                const files = Array.from(event.target.files ?? []);
-                event.target.value = '';
-                if (files.length > 0) onUpload(files);
-              }}
-            />
-          </div>
-        </section>
-
-        <section className={styles.addSection}>
-          <h3 className={styles.addHeading}>{t('credentials.add_api_key')}</h3>
-          <div className={styles.addGrid}>
-            {brands.map((brand) => {
-              const logo = PROVIDER_LOGOS[brand];
-              const src = theme === 'dark' && logo?.darkSrc ? logo.darkSrc : logo?.src;
-              return (
-                <button
-                  key={brand}
-                  type="button"
-                  className={styles.addOption}
-                  onClick={() => onApiKey(brand)}
-                >
-                  {src ? (
-                    <img src={src} alt="" aria-hidden="true" className={styles.addLogo} />
-                  ) : null}
-                  <span>{t(`providersPage.providerNames.${brand}`)}</span>
-                </button>
-              );
-            })}
           </div>
         </section>
       </Sheet>

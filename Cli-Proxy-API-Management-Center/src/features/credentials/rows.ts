@@ -1,12 +1,8 @@
 import type { TFunction } from 'i18next';
-import {
-  getTypeLabel,
-  HEALTHY_AUTH_FILE_STATUS_MESSAGES,
-  isRuntimeOnlyAuthFile,
-} from '@/features/authFiles/constants';
+import { getTypeLabel } from '@/features/authFiles/constants';
 import type { ProviderResource } from '@/features/providers/types';
 import type { RoutingCredential } from '@/services/api/credentialRouting';
-import type { AuthFileItem, OpenAIProviderConfig } from '@/types';
+import type { AuthFileItem } from '@/types';
 import { isRecord } from '@/utils/helpers';
 
 /** A routing credential joined with whichever upstream editor owns it. */
@@ -148,54 +144,4 @@ export const buildCredentialRows = (
     ...rows,
     ...leftOut.map((resource) => resourceRow(disabledResourceCredential(resource), resource)),
   ];
-};
-
-/** The keys of an OpenAI-compatible provider that stay once the given ones are removed. */
-export const keysLeft = (resource: ProviderResource, authIndexes: ReadonlySet<string>) =>
-  resource.brand === 'openaiCompatibility'
-    ? ((resource.raw as OpenAIProviderConfig).apiKeyEntries ?? []).filter(
-        (entry) => !authIndexes.has(String(entry.authIndex ?? ''))
-      )
-    : [];
-
-/** Whether an editor owns the row; a runtime-only auth file has no file to edit, like upstream. */
-export const isEditable = (row: CredentialRow) =>
-  Boolean(row.resource || (row.file && !isRuntimeOnlyAuthFile(row.file)));
-
-export type StatusTone = 'ok' | 'warn' | 'error' | 'off';
-
-/** The backend's status message for a row, unless it is one of the healthy ones. */
-export const rowWarning = (row: CredentialRow): string => {
-  const message = row.credential.statusMessage.trim();
-  return !row.disabled && message && !HEALTHY_AUTH_FILE_STATUS_MESSAGES.has(message.toLowerCase())
-    ? message
-    : '';
-};
-
-const formatTime = (iso: string) => {
-  const date = new Date(iso);
-  return Number.isNaN(date.getTime())
-    ? iso
-    : date.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
-};
-
-/** Tone and label of a row's status; `limitedFor` is the countdown to an exhausted limit's reset. */
-export const credentialStatus = (
-  row: CredentialRow,
-  limitedFor: string | null,
-  t: TFunction
-): [StatusTone, string] => {
-  const { credential } = row;
-  if (row.disabled) return ['off', t('credentials.status.disabled')];
-  if (credential.unavailable && credential.nextRetryAfter) {
-    return [
-      'warn',
-      t('credentials.status.cooling', { time: formatTime(credential.nextRetryAfter) }),
-    ];
-  }
-  if (credential.status === 'error') return ['error', t('credentials.status.error')];
-  if (credential.unavailable) return ['warn', t('credentials.status.unavailable')];
-  if (limitedFor !== null) return ['warn', t('credentials.status.limited', { time: limitedFor })];
-  if (credential.models.length === 0) return ['warn', t('credentials.status.no_models')];
-  return [rowWarning(row) ? 'warn' : 'ok', t('credentials.status.active')];
 };

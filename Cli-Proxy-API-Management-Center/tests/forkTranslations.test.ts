@@ -31,7 +31,7 @@ describe('fork translations', () => {
     const i18n = createInstance();
     await i18n.init({ lng: 'en', resources: { en: { translation: upstream } } });
     addForkTranslations(i18n);
-    expect(i18n.t('nav.credentials')).toBe('Credentials');
+    expect(i18n.t('nav.models')).toBe('Models');
     expect(i18n.t('nav.keys')).toBe('Upstream keys');
     expect(upstream).toEqual({ nav: { dashboard: 'Dashboard', keys: 'Upstream keys' } });
   });

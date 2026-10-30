@@ -1,24 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { AUTH_FILES_CHANGED_EVENT } from '@/features/authFiles/authFilesEvents';
-import {
-  buildProviderGroups,
-  useProviderWorkbench,
-} from '@/features/providers/useProviderWorkbench';
+import { useProviderWorkbench } from '@/features/providers/useProviderWorkbench';
 import { authFilesApi } from '@/services/api/authFiles';
 import { credentialRoutingApi, type RoutingCredential } from '@/services/api/credentialRouting';
 import { useAuthStore } from '@/stores';
-import type { AuthFileItem, Config } from '@/types';
+import type { AuthFileItem } from '@/types';
 import { buildCredentialRows } from './rows';
 
-/** How many rows the Credentials page lists, for the sidebar badge. */
-export const credentialCount = (credentials: readonly RoutingCredential[], config: Config | null) =>
-  buildCredentialRows(
-    credentials,
-    config ? buildProviderGroups(config).flatMap((group) => group.resources) : [],
-    []
-  ).length;
-
-/** Every credential in pick order, joined with the editors that own it. */
+/** Every credential in pick order, joined with its config resource or auth file. */
 export function useCredentialRows() {
   const connectionStatus = useAuthStore((state) => state.connectionStatus);
   const apiBase = useAuthStore((state) => state.apiBase);
@@ -73,5 +62,5 @@ export function useCredentialRows() {
     [credentials, files, resources]
   );
 
-  return { rows, workbench, error, reload: load, refresh };
+  return { rows, error, reload: load, refresh };
 }

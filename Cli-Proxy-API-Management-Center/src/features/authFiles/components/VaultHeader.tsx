@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { LoadingSpinner } from '@/components/ui/LoadingSpinner';
-import { IconRefreshCw, IconUpload } from '@/components/ui/icons';
+import { IconRefreshCw, IconSidebarOauth, IconUpload } from '@/components/ui/icons';
 import { useRevealGroup } from '@/hooks/motion';
 import styles from './VaultHeader.module.scss';
 
@@ -17,6 +17,7 @@ export type VaultHeaderProps = {
   refreshingCredentials?: boolean;
   credentialRefreshDisabled?: boolean;
   onRefreshCredentials?: () => void;
+  onSignIn?: () => void;
 };
 
 /**
@@ -37,6 +38,7 @@ export function VaultHeader(props: VaultHeaderProps) {
     refreshingCredentials = false,
     credentialRefreshDisabled = false,
     onRefreshCredentials,
+    onSignIn,
   } = props;
   const { t } = useTranslation();
   const revealRef = useRevealGroup<HTMLElement>();
@@ -92,6 +94,17 @@ export function VaultHeader(props: VaultHeaderProps) {
           <IconRefreshCw size={14} className={refreshing ? styles.spinning : undefined} />
           {t('common.refresh')}
         </button>
+        {onSignIn && (
+          <button
+            type="button"
+            className={styles.primaryAction}
+            onClick={onSignIn}
+            disabled={disableControls}
+          >
+            <IconSidebarOauth size={15} />
+            {t('credentials.add_oauth')}
+          </button>
+        )}
         <button
           type="button"
           className={styles.primaryAction}

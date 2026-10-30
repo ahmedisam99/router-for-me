@@ -1,62 +1,26 @@
 {
   "nav": {
-    "credentials": "Kimlik bilgileri",
     "stats": "İstatistikler",
     "models": "Modeller",
     "keys": "Anahtarlar",
     "info": "Bilgi"
   },
   "nav_meta": {
-    "credentials": "Anahtarlar, hesaplar ve seçim sırası",
     "stats": "İstekler, token'lar ve hatalar",
     "models": "Model haritası ve takma adlar",
     "keys": "İstemci anahtarları, bütçeler ve kurallar"
   },
   "credentials": {
-    "title": "Kimlik bilgileri",
-    "count_one": "{{count}} kimlik bilgisi",
-    "count_other": "{{count}} kimlik bilgisi",
-    "active_count": "{{active}}/{{total}} aktif",
     "strategy": {
       "fill-first": "Fill-first",
       "round-robin": "Round-robin",
       "weighted-round-robin": "Ağırlıklı round-robin"
     },
-    "empty": "Henüz kimlik bilgisi yok",
-    "move": "{{name}} öğesini taşı",
-    "enabled": "{{name}} etkin",
-    "models_one": "{{count}} model",
-    "models_other": "{{count}} model",
     "kind": {
-      "apikey": "API anahtarı",
-      "oauth": "OAuth"
+      "apikey": "API anahtarı"
     },
-    "status": {
-      "active": "Aktif",
-      "disabled": "Devre dışı",
-      "cooling": "Soğuma bitişi: {{time}}",
-      "error": "Hata",
-      "unavailable": "Kullanılamaz",
-      "no_models": "Model yok",
-      "limited": "Sınırlı · {{time}}"
-    },
-    "delete_title": "Kimlik bilgisini sil",
-    "delete_confirm": "{{name}} silinsin mi?",
-    "add_title": "Kimlik bilgisi ekle",
     "add_oauth": "Giriş yap",
-    "add_upload": "Kimlik dosyası yükle",
-    "add_api_key": "API anahtarı",
-    "add_import": "İçe aktar",
-    "details": "{{name}} ayrıntıları",
-    "refresh_token": "Token'ı yenile",
-    "download": "İndir",
-    "search": "Kimlik bilgilerinde ara",
-    "no_match": "Eşleşen kimlik bilgisi yok",
-    "select_mode": "Seç",
-    "select_done": "Bitti",
-    "refresh_tokens": "Token'ları yenile",
-    "delete_many_confirm_one": "{{count}} kimlik bilgisi silinsin mi?",
-    "delete_many_confirm_other": "{{count}} kimlik bilgisi silinsin mi?"
+    "add_import": "İçe aktar"
   },
   "model_map": {
     "title": "Modeller",
@@ -65,7 +29,6 @@
     "alias": "takma ad",
     "search": "Modellerde ara",
     "aliases_only": "Yalnızca takma adlar",
-    "oauth_aliases": "OAuth takma adları",
     "oauth_exclusions": "OAuth hariç tutmaları",
     "empty": "Model yok",
     "no_match": "Eşleşen model yok",
@@ -140,7 +103,6 @@
   "home": {
     "last_24h": "Son 24 saat",
     "open_stats": "İstatistikleri aç",
-    "open_credentials": "Kimlik bilgilerini aç",
     "client_keys": "İstemci API anahtarları",
     "quota_eyebrow": "Kota",
     "quota_title": "Kapasite ne zaman geri gelir"

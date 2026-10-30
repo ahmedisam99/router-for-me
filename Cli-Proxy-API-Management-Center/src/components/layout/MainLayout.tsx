@@ -16,9 +16,7 @@ import { useTranslation } from 'react-i18next';
 import { Button } from '@/components/ui/Button';
 import { PageTransition } from '@/components/common/PageTransition';
 import { MainRoutes } from '@/router/MainRoutes';
-import { pluginsApi } from '@/services/api';
-import { credentialRoutingApi } from '@/services/api/credentialRouting';
-import { credentialCount } from '@/features/credentials/useCredentialRows';
+import { authFilesApi, pluginsApi } from '@/services/api';
 import { IconChartColumn } from '@/components/ui/extraIcons';
 import {
   IconSidebarAuthFiles,
@@ -518,17 +516,14 @@ export function MainLayout() {
     }
 
     try {
-      const [credentials, config] = await Promise.all([
-        credentialRoutingApi.listCredentials(),
-        fetchConfig().catch(() => null),
-      ]);
+      const response = await authFilesApi.list();
       if (requestID !== authFilesCountRequestRef.current) return;
-      setAuthFilesCount(credentialCount(credentials, config));
+      setAuthFilesCount(Array.isArray(response?.files) ? response.files.length : null);
     } catch {
       if (requestID !== authFilesCountRequestRef.current) return;
       setAuthFilesCount(null);
     }
-  }, [connectionStatus, fetchConfig]);
+  }, [connectionStatus]);
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
@@ -632,13 +627,19 @@ export function MainLayout() {
       labelKey: 'nav_groups.gateway',
       items: [
         {
-          path: '/credentials',
-          labelKey: 'nav.credentials',
-          metaKey: 'nav_meta.credentials',
+          path: '/ai-providers',
+          labelKey: 'nav.ai_providers',
+          metaKey: 'nav_meta.ai_providers',
+          icon: sidebarIcons.aiProviders,
+        },
+        {
+          path: '/auth-files',
+          labelKey: 'nav.auth_files',
+          metaKey: 'nav_meta.auth_files',
           badge: authFilesCount ?? undefined,
           badgeLabel:
             typeof authFilesCount === 'number'
-              ? t('credentials.count', { count: authFilesCount })
+              ? t('sidebar.auth_files_count', { count: authFilesCount })
               : undefined,
           icon: sidebarIcons.authFiles,
         },

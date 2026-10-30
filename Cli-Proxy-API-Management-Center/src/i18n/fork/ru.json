@@ -1,68 +1,26 @@
 {
   "nav": {
-    "credentials": "Учётные данные",
     "stats": "Статистика",
     "models": "Модели",
     "keys": "Ключи",
     "info": "Информация"
   },
   "nav_meta": {
-    "credentials": "Ключи, аккаунты и порядок выбора",
     "stats": "Запросы, токены и ошибки",
     "models": "Карта моделей и псевдонимы",
     "keys": "Клиентские ключи, бюджеты и правила"
   },
   "credentials": {
-    "title": "Учётные данные",
-    "count_one": "{{count}} учётная запись",
-    "count_few": "{{count}} учётные записи",
-    "count_many": "{{count}} учётных записей",
-    "count_other": "{{count}} учётной записи",
-    "active_count": "{{active}}/{{total}} активно",
     "strategy": {
       "fill-first": "По порядку",
       "round-robin": "По кругу",
       "weighted-round-robin": "По кругу с весами"
     },
-    "empty": "Учётных данных нет",
-    "move": "Переместить {{name}}",
-    "enabled": "{{name}} включено",
-    "models_one": "{{count}} модель",
-    "models_few": "{{count}} модели",
-    "models_many": "{{count}} моделей",
-    "models_other": "{{count}} модели",
     "kind": {
-      "apikey": "API-ключ",
-      "oauth": "OAuth"
+      "apikey": "API-ключ"
     },
-    "status": {
-      "active": "Активно",
-      "disabled": "Отключено",
-      "cooling": "Пауза до {{time}}",
-      "error": "Ошибка",
-      "unavailable": "Недоступен",
-      "no_models": "Нет моделей",
-      "limited": "Лимит · {{time}}"
-    },
-    "delete_title": "Удалить учётные данные",
-    "delete_confirm": "Удалить {{name}}?",
-    "add_title": "Добавить учётные данные",
     "add_oauth": "Войти",
-    "add_upload": "Загрузить файл авторизации",
-    "add_api_key": "API-ключ",
-    "add_import": "Импорт",
-    "details": "Подробности: {{name}}",
-    "refresh_token": "Обновить токен",
-    "download": "Скачать",
-    "search": "Поиск учётных записей",
-    "no_match": "Нет подходящих учётных записей",
-    "select_mode": "Выбрать",
-    "select_done": "Готово",
-    "refresh_tokens": "Обновить токены",
-    "delete_many_confirm_one": "Удалить {{count}} учётную запись?",
-    "delete_many_confirm_few": "Удалить {{count}} учётные записи?",
-    "delete_many_confirm_many": "Удалить {{count}} учётных записей?",
-    "delete_many_confirm_other": "Удалить {{count}} учётной записи?"
+    "add_import": "Импорт"
   },
   "model_map": {
     "title": "Модели",
@@ -73,7 +31,6 @@
     "alias": "псевдоним",
     "search": "Поиск моделей",
     "aliases_only": "Только псевдонимы",
-    "oauth_aliases": "Псевдонимы OAuth",
     "oauth_exclusions": "Исключения OAuth",
     "empty": "Моделей нет",
     "no_match": "Нет подходящих моделей",
@@ -154,7 +111,6 @@
   "home": {
     "last_24h": "За 24 часа",
     "open_stats": "Открыть статистику",
-    "open_credentials": "Открыть учётные данные",
     "client_keys": "Клиентские API-ключи",
     "quota_eyebrow": "Лимиты",
     "quota_title": "Когда вернутся лимиты"

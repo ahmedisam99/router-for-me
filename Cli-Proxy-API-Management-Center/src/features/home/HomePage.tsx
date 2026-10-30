@@ -236,19 +236,7 @@ export function HomePage() {
             <h2 className={dashboard.panelTitle}>{t('dashboard.health_title')}</h2>
           </header>
           {health.total === 0 ? (
-            <>
-              <p className={dashboard.emptyNote}>
-                {credentialsError ?? t('dashboard.health_empty')}
-              </p>
-              {rows ? (
-                <Link to="/credentials?add=1" className={dashboard.panelLink}>
-                  {t('credentials.add_title')}{' '}
-                  <span className={dashboard.linkArrow} aria-hidden="true">
-                    →
-                  </span>
-                </Link>
-              ) : null}
-            </>
+            <p className={dashboard.emptyNote}>{credentialsError ?? t('dashboard.health_empty')}</p>
           ) : (
             <>
               <div className={dashboard.healthBar}>
@@ -307,8 +295,8 @@ export function HomePage() {
                   ))}
                 </ul>
               </div>
-              <Link to="/credentials" className={dashboard.panelLink}>
-                {t('home.open_credentials')}{' '}
+              <Link to="/auth-files" className={dashboard.panelLink}>
+                {t('dashboard.health_link')}{' '}
                 <span className={dashboard.linkArrow} aria-hidden="true">
                   →
                 </span>

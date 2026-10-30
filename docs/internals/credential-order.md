@@ -1,7 +1,7 @@
 # Credential order
 
-The Credentials page lists every credential in the order the proxy picks it, and dragging a row
-rewrites priorities. The rules below decide what that order means.
+The Models page lists each model's credentials in the order the proxy picks them. The rules below
+decide what that order means. Upstream's Routing page sets the priorities.
 
 ## How the backend picks
 
@@ -15,20 +15,8 @@ that serve it.
 A tie between providers has no single answer. When a model is served by several providers, the
 scheduler takes the best priority across them, then breaks a tie by provider order: most
 credentials for that model first, then name. The legacy path, used for example when an alias maps
-the model to another upstream name, breaks the same tie by ID. The pages therefore give tied
-credentials of different providers one shared rank, and only rank by ID within a provider.
-
-## How the dashboard pins it
-
-A reorder writes distinct priorities, from N at the top down to 1, so no ties are left and the
-list is the real order. Config keys get a key-level `priority` in `api-keys.<family>`;
-OpenAI-compatible providers only accept one at the group level, so all keys of such a group share
-it. Auth files take it through `PATCH /credentials/fields`. Runtime-only credentials can't hold a
-priority and keep theirs. See [`credentialRouting.ts`](../../Cli-Proxy-API-Management-Center/src/services/api/credentialRouting.ts)
-and [`order.ts`](../../Cli-Proxy-API-Management-Center/src/features/credentials/order.ts).
-
-Pinning removes rotation, which is right for `fill-first` and wrong for a round-robin setup. Revisit
-this if the strategy changes.
+the model to another upstream name, breaks the same tie by ID. The Models page therefore gives tied
+credentials of different providers one shared rank, and only ranks by ID within a provider.
 
 ## Why a core endpoint
 
@@ -46,6 +34,8 @@ fails there rather than drifting silently.
 Disabling a credential drops its models from the registry, and working out what it would serve
 means copying upstream's per-provider registration. So the endpoint remembers what each enabled
 credential serves, in `<auth-dir>/routing/last-models.yaml`, and lists that as a disabled one's
-`last_models`. The memory updates only when the endpoint is read, which the dashboard does before
-you can disable anything. A disabled OpenAI-compatible provider has no credential at all, so the
-dashboard lists the models from its config instead.
+`last_models`. The memory updates only when one of our pages reads the endpoint (Home, Models,
+Stats, Keys), not when upstream's Auth Files or AI Providers pages disable a credential. Home is
+where the dashboard lands, so a credential is normally recorded before it is disabled. A disabled
+OpenAI-compatible provider has no credential at all, so the dashboard lists the models from its
+config instead.

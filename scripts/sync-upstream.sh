@@ -67,9 +67,8 @@ scripts/fork-diff.sh
 
 # Our pages replace these (docs/internals/dashboard-layout.md), so what upstream adds to them reaches
 # our dashboard only if we carry it over. Paths are as in upstream's repo, compared between its tags.
-replaced=(src/features/authFiles/AuthFilesPage.tsx src/features/authFiles/components/AuthFileCard.tsx
-  src/features/oauth/OAuthPage.tsx src/features/dashboard/DashboardPage.tsx
-  src/features/providers/ProvidersWorkbenchPage.tsx 'src/features/providers/components/ProviderResource*.tsx')
+# The sign-in sheet mirrors the OAuth page's tiles, so new sign-in options land there too.
+replaced=(src/features/oauth/OAuthPage.tsx src/features/dashboard/DashboardPage.tsx)
 previous=$(synced Cli-Proxy-API-Management-Center 1)
 changed=$(git diff --stat "panel/$previous" "panel/$panel" -- "${replaced[@]}")
 if [ -n "$changed" ]; then

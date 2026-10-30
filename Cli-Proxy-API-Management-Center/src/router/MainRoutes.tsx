@@ -2,10 +2,11 @@ import { Navigate, useRoutes, type Location } from 'react-router-dom';
 import { HomePage } from '@/features/home/HomePage';
 import { ModelsPage } from '@/features/models/ModelsPage';
 import { ProvidersWorkbenchPage } from '@/features/providers/ProvidersWorkbenchPage';
-import { CredentialsPage } from '@/features/credentials/CredentialsPage';
+import { AuthFilesPage } from '@/features/authFiles/AuthFilesPage';
 import { KeysPage } from '@/features/keys/KeysPage';
 import { AuthFilesOAuthExcludedEditPage } from '@/pages/AuthFilesOAuthExcludedEditPage';
 import { AuthFilesOAuthModelAliasEditPage } from '@/pages/AuthFilesOAuthModelAliasEditPage';
+import { OAuthPage } from '@/features/oauth/OAuthPage';
 import { QuotaPage } from '@/features/quota/QuotaPage';
 import { StatsPage } from '@/features/stats/StatsPage';
 import { RoutingPage } from '@/features/routing/RoutingPage';
@@ -24,15 +25,14 @@ const createMainRoutes = (supportsPlugin: boolean) => [
   { path: '/api-keys', element: <Navigate to="/keys" replace /> },
   { path: '/quick-start', element: <ProvidersWorkbenchPage fixedBrand="apikeyFun" /> },
   { path: '/quick-start/*', element: <Navigate to="/quick-start" replace /> },
-  { path: '/credentials', element: <CredentialsPage /> },
   { path: '/models', element: <ModelsPage /> },
   { path: '/keys', element: <KeysPage /> },
-  { path: '/ai-providers', element: <Navigate to="/credentials" replace /> },
-  { path: '/ai-providers/*', element: <Navigate to="/credentials" replace /> },
-  { path: '/auth-files', element: <Navigate to="/credentials" replace /> },
+  { path: '/ai-providers', element: <ProvidersWorkbenchPage /> },
+  { path: '/ai-providers/*', element: <Navigate to="/ai-providers" replace /> },
+  { path: '/auth-files', element: <AuthFilesPage /> },
   { path: '/auth-files/oauth-excluded', element: <AuthFilesOAuthExcludedEditPage /> },
   { path: '/auth-files/oauth-model-alias', element: <AuthFilesOAuthModelAliasEditPage /> },
-  { path: '/oauth', element: <Navigate to="/credentials?add=1" replace /> },
+  { path: '/oauth', element: <OAuthPage /> },
   { path: '/stats', element: <StatsPage /> },
   { path: '/routing', element: <RoutingPage /> },
   { path: '/quota', element: <QuotaPage /> },

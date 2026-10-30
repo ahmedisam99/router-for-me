@@ -1,59 +1,26 @@
 {
   "nav": {
-    "credentials": "憑證",
     "stats": "統計",
     "models": "模型",
     "keys": "金鑰",
     "info": "資訊"
   },
   "nav_meta": {
-    "credentials": "金鑰、帳號與呼叫順序",
     "stats": "請求、權杖與錯誤",
     "models": "模型對應與別名",
     "keys": "用戶端金鑰、預算與規則"
   },
   "credentials": {
-    "title": "憑證",
-    "count_other": "{{count}} 個憑證",
-    "active_count": "{{active}}/{{total}} 啟用",
     "strategy": {
       "fill-first": "順序填充",
       "round-robin": "輪詢",
       "weighted-round-robin": "加權輪詢"
     },
-    "empty": "尚無憑證",
-    "move": "移動 {{name}}",
-    "enabled": "{{name}} 已啟用",
-    "models_other": "{{count}} 個模型",
     "kind": {
-      "apikey": "API 金鑰",
-      "oauth": "OAuth"
+      "apikey": "API 金鑰"
     },
-    "status": {
-      "active": "可用",
-      "disabled": "已停用",
-      "cooling": "冷卻至 {{time}}",
-      "error": "錯誤",
-      "unavailable": "無法使用",
-      "no_models": "無模型",
-      "limited": "已達上限 · {{time}}"
-    },
-    "delete_title": "刪除憑證",
-    "delete_confirm": "刪除 {{name}}？",
-    "add_title": "新增憑證",
     "add_oauth": "登入",
-    "add_upload": "上傳認證檔案",
-    "add_api_key": "API 金鑰",
-    "add_import": "匯入",
-    "details": "{{name}} 詳情",
-    "refresh_token": "重新整理權杖",
-    "download": "下載",
-    "search": "搜尋憑證",
-    "no_match": "沒有符合的憑證",
-    "select_mode": "選取",
-    "select_done": "完成",
-    "refresh_tokens": "重新整理權杖",
-    "delete_many_confirm_other": "刪除 {{count}} 個憑證？"
+    "add_import": "匯入"
   },
   "model_map": {
     "title": "模型",
@@ -61,7 +28,6 @@
     "alias": "別名",
     "search": "搜尋模型",
     "aliases_only": "僅顯示別名",
-    "oauth_aliases": "OAuth 別名",
     "oauth_exclusions": "OAuth 排除",
     "empty": "尚無模型",
     "no_match": "沒有符合的模型",
@@ -133,7 +99,6 @@
   "home": {
     "last_24h": "最近 24 小時",
     "open_stats": "開啟統計",
-    "open_credentials": "開啟憑證",
     "client_keys": "用戶端 API 金鑰",
     "quota_eyebrow": "額度",
     "quota_title": "額度何時恢復"

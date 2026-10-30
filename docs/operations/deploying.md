@@ -63,6 +63,21 @@ default (`retention_days`). The Stats page reads it; without the plugin the page
 Without it the backend tries to replace our dashboard with upstream's latest release every 3 hours.
 The read-only mount blocks the write, but every attempt logs a warning.
 
+## Logs
+
+The proxy logs to `deploy/data/logs/main.log`, not to `docker logs`
+(`observability.logs.logging-to-file: true`). The file also feeds the dashboard's Logs page, survives
+deploys, and the folder is capped at 100 MB. Failed requests are saved beside it as `error-*.log`.
+
+The container creates `main.log` readable only by root. It was made readable once:
+
+```bash
+docker exec cli-proxy-api chmod 644 /root/.cli-proxy-api/logs/main.log
+```
+
+Rotation and the Logs page's clear button both keep that mode. Run it again if the file ever comes
+back unreadable.
+
 ## Rolling back
 
 A backend upgrade can rewrite `deploy/config.yaml` and the auth files in `deploy/data/`, so copy both

@@ -4,7 +4,7 @@
     "stats": "Stats",
     "models": "Models",
     "keys": "Keys",
-    "system_info": "Info"
+    "info": "Info"
   },
   "nav_meta": {
     "credentials": "Keys, accounts & pick order",

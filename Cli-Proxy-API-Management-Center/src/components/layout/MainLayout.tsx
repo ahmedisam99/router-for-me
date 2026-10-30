@@ -616,7 +616,7 @@ export function MainLayout() {
         },
         {
           path: '/system',
-          labelKey: 'nav.system_info',
+          labelKey: 'nav.info',
           metaKey: 'nav_meta.system_info',
           icon: sidebarIcons.system,
         },

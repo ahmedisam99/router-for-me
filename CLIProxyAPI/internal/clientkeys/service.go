@@ -16,13 +16,13 @@ import (
 	"sync"
 	"time"
 
+	"github.com/MoeForge/moego/ojson"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/config"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/thinking"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/util"
 	sdkaccess "github.com/router-for-me/CLIProxyAPI/v8/sdk/access"
 	coreusage "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/usage"
 	log "github.com/sirupsen/logrus"
-	"github.com/tidwall/gjson"
 )
 
 // Service holds the policies, price list and spend ledger of the client keys.
@@ -326,7 +326,7 @@ func nestedModels(format string, body []byte) []string {
 	}
 	var models []string
 	for _, path := range []string{"tools.#.model", "fallbacks.#.model"} {
-		for _, model := range gjson.GetBytes(body, path).Array() {
+		for _, model := range ojson.GetBytes(body, path).Array() {
 			if name := strings.TrimSpace(model.String()); name != "" {
 				models = append(models, name)
 			}

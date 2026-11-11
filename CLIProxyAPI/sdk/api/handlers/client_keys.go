@@ -4,12 +4,12 @@ import (
 	"errors"
 	"strings"
 
+	"github.com/MoeForge/moego/ojson"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/clientkeys"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/interfaces"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/thinking"
 	"github.com/router-for-me/CLIProxyAPI/v8/internal/util"
 	coreusage "github.com/router-for-me/CLIProxyAPI/v8/sdk/cliproxy/usage"
-	"github.com/tidwall/gjson"
 	"golang.org/x/net/context"
 )
 
@@ -34,7 +34,7 @@ func (h *BaseAPIHandler) RejectClientKeyTurn(key, format, sessionModel string, s
 	if key == "" || !clientkeys.Enforced() {
 		return nil
 	}
-	turnModel := strings.TrimSpace(gjson.GetBytes(turn, "model").String())
+	turnModel := strings.TrimSpace(ojson.GetBytes(turn, "model").String())
 	if turnModel == "" {
 		turnModel = sessionModel
 	}

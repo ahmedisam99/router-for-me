@@ -15,9 +15,11 @@ Where the fork's dashboard code lives, so upstream syncs stay cheap.
   conflict there. Use a namespace upstream doesn't (upstream already owns `stats`, ours is
   `stats_page`).
 - **Upstream hunks are wiring only.** They cover the routes, the sidebar entries, the i18n merge
-  call, the Auth Files header's Sign in button, and one bug fix in `transformers.ts`, which read `auth-index` while v8 sends `auth_index`.
-  Upstream's own test fixture uses the wrong spelling, so the fix reads both. Drop it once upstream
-  fixes it.
+  call, the Auth Files header's Sign in button, and two bug fixes. `transformers.ts` read
+  `auth-index` while v8 sends `auth_index`. Upstream's own test fixture uses the wrong spelling, so
+  the fix reads both. `tests/authFileCooldowns.test.ts` compared a translated hint with markup that
+  escapes its apostrophe, so it failed whenever a test file that switches to English ran before it.
+  Drop each once upstream fixes it.
 - **Plugin routes keep their `/v0/management` path.** The plugin host forces that prefix, so
   `usageStats.ts` passes an absolute URL to `apiClient`, which skips the v8 base but keeps auth and
   error handling.

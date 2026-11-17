@@ -56,7 +56,7 @@ for plugin in plugins/*/; do
   rm -f "$plugin_dir/$id.h"
 done
 
-head -c 18 /dev/urandom | base64 | tr -d '/+=' >"$dir/password"
+sed -n 's/^MANAGEMENT_PASSWORD=//p' deploy/.env >"$dir/password" # the live key, so one login works on both
 chmod 600 "$dir/password"
 
 # The live config, moved to this port and directory, with usage-stats on; then the fake accounts.
@@ -163,5 +163,5 @@ start
 
 echo
 echo "Staging: $url/management.html"
-echo "Key:     $(cat "$dir/password")   (your usual management key works too)"
+echo "Key:     the live one, from deploy/.env"
 echo "Stop:    $0 stop"

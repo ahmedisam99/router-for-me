@@ -32,7 +32,7 @@ For dashboard work, run `bun run dev` in `Cli-Proxy-API-Management-Center/` and 
 
 `scripts/staging.sh` runs this checkout beside the live proxy, on `http://127.0.0.1:8318`: the backend,
 the plugins and the dashboard, with a copy of `deploy/config.yaml`, fake accounts and 14 days of fake
-usage, in `/tmp/router-for-me-staging`. It prints a management key, and the live one works too.
+usage, in `/tmp/router-for-me-staging`. It takes the live management key.
 `scripts/staging.sh stop` stops it. Use it to look at a sync or a backend change before deploying.
 Its tokens are fake, so quota checks fail and no request reaches a provider. It never copies
 `deploy/data/`, see the hazards in `CLAUDE.md`.
@@ -62,6 +62,9 @@ default (`retention_days`). The Stats page reads it; without the plugin the page
 `deploy/config.yaml` is not in git. Keep `disable-auto-update-panel: true` under `management:` in it.
 Without it the backend tries to replace our dashboard with upstream's latest release every 3 hours.
 The read-only mount blocks the write, but every attempt logs a warning.
+
+The management key is `MANAGEMENT_PASSWORD` in `deploy/.env`, also not in git. Don't move it to
+`secret-key` in the config: the backend replaces that with a bcrypt hash, and the key can't be read back.
 
 ## Logs
 

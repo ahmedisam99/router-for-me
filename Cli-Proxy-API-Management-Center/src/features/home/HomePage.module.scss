@@ -65,6 +65,12 @@
   margin: 4px 0 2px;
 }
 
+.statHint {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--text-tertiary);
+}
+
 /* ---------- recent failures ---------- */
 
 .failures {

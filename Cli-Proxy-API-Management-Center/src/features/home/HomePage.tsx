@@ -222,7 +222,7 @@ export function HomePage() {
                   ariaLabel={tile.label}
                   className={styles.spark}
                 />
-                <span className={dashboard.statHint}>{tile.hint}</span>
+                <span className={styles.statHint}>{tile.hint}</span>
               </article>
             ))}
           </div>

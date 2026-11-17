@@ -23,7 +23,7 @@ panel_version+=+$(revision ../Cli-Proxy-API-Management-Center)
 
 # plugins/<id>/ -> plugins/<os>/<arch>/<id>.so, built in the backend's builder image so it links the container's glibc
 mkdir -p plugins
-plugin_hashes() { find plugins -name '*.so' -type f -exec sha256sum {} + | sort; }
+plugin_hashes() { find plugins -name .shadow -prune -o -name '*.so' -type f -exec sha256sum {} + | sort; } # .shadow: the backend's root-only copies
 builder=$(sed -n 's/^FROM \([^ ]*\) AS builder$/\1/p' ../CLIProxyAPI/Dockerfile)
 plugins_before=$(plugin_hashes)
 for dir in ../plugins/*/; do

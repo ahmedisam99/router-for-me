@@ -32,8 +32,9 @@ while being edited on the Config page, must not come back without its restrictio
 - **Codex duplex websocket follow-up turns** go straight upstream. A turn is refused when it would need a
   redirect the session isn't already running with.
 
-Live, realtime and alpha search get the key checks but not the model rules; a realtime client secret is
-checked against the key that minted it. Redirects on image and video routes are unreliable, because those
+Live, realtime, alpha search, Muse Code and the websocket tunnel get the key checks but not the model rules;
+a realtime client secret is checked against the key that minted it. The tunnel checks keys on its own, so
+we put the middleware in front of it; a tunnel already open stays open when its key is switched off. Redirects on image and video routes are unreliable, because those
 handlers shape the payload for the requested model first; blocks work.
 
 ## Effort redirects are a model suffix

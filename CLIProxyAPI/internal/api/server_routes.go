@@ -95,7 +95,7 @@ func (s *Server) setupRoutes() {
 		v1.GET("/live/:call_id", s.codexLiveHandler.HandleSideband)
 	}
 
-	s.engine.GET("/v1/tunnel", s.handleWebsocketTunnel)
+	s.engine.GET("/v1/tunnel", AuthMiddleware(s.accessManager), s.handleWebsocketTunnel)
 	for _, method := range []string{http.MethodPost, http.MethodPut, http.MethodPatch, http.MethodDelete, http.MethodHead, http.MethodTrace, http.MethodConnect} {
 		s.engine.Handle(method, "/v1/tunnel", s.handleWebsocketTunnel)
 	}

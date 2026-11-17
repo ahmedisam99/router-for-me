@@ -145,3 +145,27 @@ func TestRealtimeClientSecretAppliesClientKeyPolicy(t *testing.T) {
 		t.Fatalf("call with a switched-off key's secret = %d %s, want 403", callRecorder.Code, callRecorder.Body.String())
 	}
 }
+
+func TestWebsocketTunnelAppliesClientKeyPolicy(t *testing.T) {
+	server := newTestServer(t)
+	svc, errOpen := clientkeys.Open(t.TempDir(), clientkeys.Options{Fetch: func(context.Context, string) ([]byte, error) {
+		return nil, errors.New("offline")
+	}})
+	if errOpen != nil {
+		t.Fatalf("clientkeys.Open() error = %v", errOpen)
+	}
+	t.Cleanup(svc.Close)
+	clientkeys.SetDefault(svc)
+	t.Cleanup(func() { clientkeys.SetDefault(nil) })
+	off := false
+	if _, errUpdate := svc.UpdateKey([]string{"test-key"}, clientkeys.KeyID("test-key"), clientkeys.KeyUpdate{Enabled: &off}); errUpdate != nil {
+		t.Fatalf("UpdateKey() error = %v", errUpdate)
+	}
+
+	req := httptest.NewRequest(http.MethodGet, "/v1/tunnel?auth_token=test-key", nil)
+	rec := httptest.NewRecorder()
+	server.engine.ServeHTTP(rec, req)
+	if rec.Code != http.StatusForbidden || !strings.Contains(rec.Body.String(), "This API key is switched off") {
+		t.Fatalf("tunnel with a switched-off key = %d %s, want 403", rec.Code, rec.Body.String())
+	}
+}

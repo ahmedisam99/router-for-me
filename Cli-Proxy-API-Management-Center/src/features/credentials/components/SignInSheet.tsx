@@ -4,6 +4,7 @@ import iconCodex from '@/assets/icons/codex.svg';
 import iconVertex from '@/assets/icons/vertex.svg';
 import { Sheet } from '@/components/ui/Sheet';
 import { notifyAuthFilesChanged } from '@/features/authFiles/authFilesEvents';
+import { LoginProxyField } from '@/features/oauth/components/LoginProxyField';
 import { OAuthFlowDialog } from '@/features/oauth/components/OAuthFlowDialog';
 import { ProviderTile } from '@/features/oauth/components/ProviderTile';
 import { SiwcBindDialog } from '@/features/oauth/components/SiwcBindDialog';
@@ -119,6 +120,11 @@ export function SignInSheet({ open, onClose: close }: SignInSheetProps) {
     <>
       <Sheet open={open} onClose={onClose} size="lg" title={t('credentials.add_oauth')}>
         <section className={styles.section}>
+          <LoginProxyField
+            value={flows.loginProxy}
+            rejectedValue={flows.loginProxyRejected}
+            onChange={flows.setLoginProxy}
+          />
           <div className={styles.tiles}>
             {providerCards.map((card, index) => (
               <ProviderTile
@@ -168,6 +174,11 @@ export function SignInSheet({ open, onClose: close }: SignInSheetProps) {
           state={flows.states[dialogCard.id] ?? {}}
           text={(suffix) => flows.providerText(dialogCard.id, suffix)}
           supportsCallback={supportsManualCallback(dialogCard)}
+          signInNote={
+            dialogCard.kind === 'builtin' && dialogCard.signInNoteKey
+              ? t(dialogCard.signInNoteKey)
+              : undefined
+          }
           sponsor={
             isSponsor(dialogCard)
               ? { url: dialogCard.sponsor.signUpUrl, label: t('auth_login.kimi_sign_up_button') }

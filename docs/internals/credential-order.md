@@ -10,7 +10,8 @@ Highest `priority` wins, and ties fall back to the credential ID compared byte b
 prefix and headers, so a tie between two keys is effectively random and changes when any of those
 fields is edited. Under `fill-first` the order is strict; under the round-robin strategies,
 credentials of equal priority rotate. The order also only applies per model, among the credentials
-that serve it.
+that serve it. A Claude request that continues a thread skips it and goes to the credential that owns
+the thread.
 
 A tie between providers has no single answer. When a model is served by several providers, the
 scheduler takes the best priority across them, then breaks a tie by provider order: most
@@ -36,6 +37,7 @@ means copying upstream's per-provider registration. So the endpoint remembers wh
 credential serves, in `<auth-dir>/routing/last-models.yaml`, and lists that as a disabled one's
 `last_models`. The memory updates only when one of our pages reads the endpoint (Home, Models,
 Stats, Keys), not when upstream's Auth Files or AI Providers pages disable a credential. Home is
-where the dashboard lands, so a credential is normally recorded before it is disabled. A disabled
+where the dashboard lands, so a credential is normally recorded before it is disabled. The backend
+also disables an Antigravity credential by itself after a terms-of-service violation. A disabled
 OpenAI-compatible provider has no credential at all, so the dashboard lists the models from its
 config instead.

@@ -5,11 +5,9 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 
-# release CLIProxyAPI -> v8.0.34, read from the subtree's last squash commit
+# release CLIProxyAPI -> v8.0.34, read from the subject of the subtree's last merge by scripts/sync-upstream.sh
 release() {
-  git describe --tags --exact-match \
-    "$(git log -1 --format=%B --grep="^git-subtree-dir: $1\$" | sed -n 's/^git-subtree-split: //p')" |
-    sed 's|^[^/]*/||'
+  git log -1 --merges --format=%s --grep="^Sync $1 to " | sed "s/^Sync $1 to //"
 }
 
 # revision ../CLIProxyAPI -> abc1234, or abc1234-dirty with uncommitted changes there
@@ -41,6 +39,7 @@ COMMIT=$(revision ../CLIProxyAPI)
 BUILD_DATE=$(TZ=UTC git log -1 --date=format-local:%Y-%m-%dT%H:%M:%SZ --format=%cd -- ../CLIProxyAPI)
 export VERSION COMMIT BUILD_DATE
 container=$(docker compose ps -q cli-proxy-api)
+mkdir -p static # before compose, or Docker creates the bind-mount source as root and the copy below fails
 docker compose up -d --build
 # The backend loads plugins only at startup, so a changed plugin needs a restart when compose kept the container.
 if [ "$plugins_before" != "$plugins_after" ] && [ "$(docker compose ps -q cli-proxy-api)" = "$container" ]; then
@@ -48,5 +47,4 @@ if [ "$plugins_before" != "$plugins_after" ] && [ "$(docker compose ps -q cli-pr
 fi
 
 # Last, so the new dashboard never talks to the old backend.
-mkdir -p static
 cp ../Cli-Proxy-API-Management-Center/dist/index.html static/management.html

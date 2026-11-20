@@ -9,7 +9,7 @@ services:
         COMMIT: ${COMMIT:-none}
         BUILD_DATE: ${BUILD_DATE:-unknown}
     container_name: cli-proxy-api
-    restart: "no" # quoted: a bare no is boolean false under YAML 1.1
+    restart: unless-stopped # comes back with Docker at boot; docker compose stop keeps it down
     ports: # OAuth callbacks (codex 1455, claude 54545) are unpublished: add one for a login, then remove it
       - "127.0.0.1:8317:8317" # cx alias + direct
     environment: # the backend would replace a secret-key in config.yaml with its bcrypt hash
